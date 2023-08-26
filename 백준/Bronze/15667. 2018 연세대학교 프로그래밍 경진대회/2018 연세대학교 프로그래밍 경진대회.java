@@ -14,6 +14,7 @@ public class Main {
     	// A(A+1)+1 = N
     	N-=1;
     	
+    	// 폭죽 수 계산
     	for(int i=1;;i++)
     		if(i*(i+1)==N) {
     			bw.write(i+"");
