@@ -23,7 +23,7 @@ public class Main {
     	
     	// 두 실근인 경우
     	else
-    		bw.write((int)(-2*A-Math.sqrt(4*A*A-4*B))/2+" "+(int)(-2*A+Math.sqrt(4*A*A-4*B))/2);
+    		bw.write((int)(-A-Math.sqrt(A*A-B))+" "+(int)(-A+Math.sqrt(A*A-B)));
     	
     	bw.close();
     } // end of main
