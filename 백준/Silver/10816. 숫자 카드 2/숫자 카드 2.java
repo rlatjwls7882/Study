@@ -12,7 +12,6 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        
         // 카드의 개수 N 입력
         int N = Integer.valueOf(br.readLine());
         
