@@ -13,14 +13,14 @@ public class Main {
         int N = Integer.valueOf(br.readLine());
         
         // 소인수분해 결과 출력
-        for(int i=2;i<=N;) {
-        	if(N%i==0) {
+        for(int i=2;i*i<=N;i++) {
+        	while(N%i==0) {
         		N/=i;
         		bw.write(i+"\n");
         	}
-        	
-        	else i++;
         }
+        
+        if(N!=1) bw.write(N+"");
         
         bw.close();
     } // end of main
