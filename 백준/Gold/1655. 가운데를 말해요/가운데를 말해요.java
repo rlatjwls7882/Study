@@ -18,13 +18,13 @@ public class Main {
         PriorityQueue<Integer> front = new PriorityQueue<Integer>(Collections.reverseOrder());
         PriorityQueue<Integer> back = new PriorityQueue<Integer>();
         
-        while(N--!=0) {
+        for(int i=1;i<=N;i++) {
         	
         	// 백준이가 말하는 정수 입력
         	int X = Integer.valueOf(br.readLine());
         	
         	// 홀수번째인 경우 front에 넣음
-        	if(front.size()==back.size()) {
+        	if(i%2==1) {
         		try {
         			
         			// 넣어야 하는 정수가 front의 최대값보다 큰 경우
@@ -45,22 +45,15 @@ public class Main {
         	
         	// 짝수번째인 경우 back에 넣음
         	else {
-        		try {
-        			
-        			// 넣어야 하는 정수가 front의 최대값보다 작은 경우
-        			if(front.peek()>X) {
-        				front.add(X);
-        				back.add(front.poll());
-        			}
-        			
-        			else
-        				back.add(X);
-					
-				} catch (Exception e) {
-					
-					// back에 아무것도 없는 경우
-					back.add(X);
-				}
+        		
+        		// 넣어야 하는 정수가 front의 최대값보다 작은 경우
+        		if(front.peek()>X) {
+        			front.add(X);
+        			back.add(front.poll());
+        		}
+
+        		else
+        			back.add(X);
         	}
         	
         	// 백준이의 동생이 말해야하는 중앙값 출력
