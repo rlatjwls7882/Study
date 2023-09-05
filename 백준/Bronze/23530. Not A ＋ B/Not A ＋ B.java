@@ -14,7 +14,7 @@ public class Main {
         
         while(t--!=0) {
         	
-        	// a, b를 입력하여 a+b가 아닌 c 출력
+        	// a, b를 입력하여 a+b가 아닌 값 출력
         	String aAndb = br.readLine();
         	
         	bw.write(aAndb.charAt(0)+"\n");
