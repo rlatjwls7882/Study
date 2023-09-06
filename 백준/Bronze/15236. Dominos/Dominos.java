@@ -13,12 +13,12 @@ public class Main {
         int N = Integer.valueOf(br.readLine());
         
         // 완벽한 도미노 세트에 있는 점의 총 개수 계산
-        int point=0;
         
-        for(int i=0;i<=N;i++)
+//        for(int i=0;i<=N;i++)
 //        	for(int j=0;j<=N;j++)
 //        		point += i+j;
-        	point += i + N*(N+1)/2;
+        
+        int point = N*(N+1)*(N+2)/2;
         
         // 점의 개수 출력
         bw.write(point+"");
