@@ -15,9 +15,7 @@ public class Main {
         while(T--!=0) {
         	
         	// 비용의 단위 출력
-        	String cost = br.readLine();
-        	
-        	bw.write(cost.length()+"\n");
+        	bw.write(br.readLine().length()+"\n");
         }
         
         bw.close();
