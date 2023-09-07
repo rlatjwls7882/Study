@@ -12,14 +12,14 @@ public class Main {
         // N 입력
         int N = Integer.valueOf(br.readLine());
         
-        // 숫자를 세는 방법의 수 계산
+        // 손가락으로 숫자를 세는 방법의 수 계산
         int cnt=0;
         
         for(int i=0;i<=N;i++)
         	if(N-i>=i&&N-i<=5)
         		cnt++;
         
-        // 숫자를 세는 방법의 수 출력
+        // 손가락으로 숫자를 세는 방법의 수 출력
         bw.write(cnt+"");
         bw.close();
     } // end of main
