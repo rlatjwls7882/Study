@@ -15,8 +15,7 @@ public class Main {
         int D = Integer.valueOf(br.readLine());
         int X = Integer.valueOf(br.readLine());
         
-        int min = 10000, max=1;
-        
+        // 최소 정수 계산
         for(int i=L;i<=D;i++) {
         	
         	// 자리 수의 합 계산
@@ -27,16 +26,31 @@ public class Main {
         		tmp/=10;
         	}
         	
-        	// 자리 수의 합이 X인 최소정수, 최대정수 계산
+        	// 자리 수의 합이 X인 최소 정수 출력
         	if(sum==X) {
-        		
-        		if(i<min) min=i;
-        		if(i>max) max=i;
+        		bw.write(i+"\n");
+        		break;
         	}
         }
         
-        // 자리 수의 합이 X인 최소정수, 최대정수 출력
-        bw.write(min+"\n"+max);
+        // 최대 정수 계산
+        for(int i=D;i>=L;i--) {
+        	
+        	// 자리 수의 합 계산
+        	int sum=0, tmp=i;
+        	
+        	while(tmp!=0) {
+        		sum += tmp%10;
+        		tmp/=10;
+        	}
+        	
+        	// 자리 수의 합이 X인 최대 정수 출력
+        	if(sum==X) {
+        		bw.write(i+"");
+        		break;
+        	}
+        }
+        
         bw.close();
     } // end of main
 } // end of Main class
