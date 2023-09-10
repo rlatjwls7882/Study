@@ -23,7 +23,7 @@ public class Main {
         for(int i=0;i<=A-1;i++)
         	bw.write(string.charAt(i));
         
-        // A~B번째 문자 출력
+        // A~B번째 문자 거꾸로 출력
         for(int i=B;i>=A;i--)
         	bw.write(string.charAt(i));
         
