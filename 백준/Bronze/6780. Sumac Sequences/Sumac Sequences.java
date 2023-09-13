@@ -25,7 +25,7 @@ public class Main {
         	length++;
         }
         
-        // 등차수열의 길이 출력
+        // 수열의 길이 출력
         bw.write(length+"");
         bw.close();
     } // end of main
