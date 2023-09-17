@@ -24,8 +24,7 @@ public class Main {
         	int c2 = Integer.valueOf(st.nextToken());
         	
         	// 말이 시작시점에서 단 한번의 움직임으로 도착지점에 도달할 수 있는지 출력
-        	if((Math.abs(r1-r2)==1&&Math.abs(c1-c2)==2)
-               ||(Math.abs(r1-r2)==2&&Math.abs(c1-c2)==1))
+        	if(Math.abs((r1-r2)*(c1-c2))==2)
         		bw.write(String.format("Case %d: YES\n", i));
         	else
         		bw.write(String.format("Case %d: NO\n", i));
