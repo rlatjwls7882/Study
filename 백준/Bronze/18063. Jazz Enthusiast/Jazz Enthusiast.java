@@ -27,7 +27,7 @@ public class Main {
         			.plusSeconds(Integer.valueOf(st.nextToken()));
         }
         
-        // 전체 재생 목록을 듣는 데 걸리는 시간 계산
+        // 모든 노래를 재생하는데 걸리는 시간 출력
         bw.write(time.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
         bw.close();
     } // end of main
