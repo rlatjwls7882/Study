@@ -17,7 +17,7 @@ public class Main {
         while(st.hasMoreTokens()) {
         	
         	// 작업장에서 고객까지의 거리 입력
-        	double km = Integer.valueOf(st.nextToken())/1000;
+        	int km = Integer.valueOf(st.nextToken())/1000;
         	
         	// 1번 택배 회사
         	double case1=0;
