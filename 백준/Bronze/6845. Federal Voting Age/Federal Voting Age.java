@@ -11,7 +11,6 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        
         // 생일의 수 n 입력
         int n = Integer.valueOf(br.readLine());
         
