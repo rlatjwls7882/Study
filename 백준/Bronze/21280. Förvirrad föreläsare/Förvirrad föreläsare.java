@@ -20,7 +20,7 @@ public class Main {
         for(int i=0;i<N;i++)
         	speech[i] = Integer.valueOf(st.nextToken());
         
-        // 빈 강의실에서 한 강의수와 놓친 강의의 수 계산
+        // 빈 강의실에서 한 강의의 수와 놓친 강의의 수 계산
         int empty=0, missed=0;
         
         for(int i=1;i<N;i++) {
@@ -30,7 +30,7 @@ public class Main {
         		empty += speech[i-1] - speech[i];
         }
         
-        // 빈 강의실에서 한 강의수와 놓친 강의의 수 출력
+        // 빈 강의실에서 한 강의의 수와 놓친 강의의 수 출력
         bw.write(empty+" "+missed);
         bw.close();
     } // end of main
