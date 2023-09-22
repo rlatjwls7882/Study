@@ -22,9 +22,9 @@ public class Main {
         int j = Integer.valueOf(st.nextToken());
         long k = Integer.valueOf(st.nextToken());
         
-        // i월 j일의 요일 출력
+        // k년 j월 i일의 요일 출력
         String dayOfWeek = "abcdefghijklmnopqrstuvwxyz";
-        long day = (((k-1)*m+i-1)*d+j-1)%w;
+        long day = (((k-1)*m+j-1)*d+i-1)%w;
         
         bw.write(dayOfWeek.charAt((int)day));
         
