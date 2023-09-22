@@ -21,7 +21,7 @@ public class Main {
         	if(max<sum) max=sum;
         }
         
-        // 얻을 수 있는 가장 높은 지불금 출력
+        // 얻을 수 있는 가장 높은 상금 출력
         bw.write(max+100+"");
         bw.close();
     } // end of main
