@@ -17,6 +17,7 @@ public class Main {
         
         // 최적화로 foo 함수가 얼마나 빨라졌는지 출력
         bw.write((100-y)*x/((100.-x)*y)+"");
+        
         bw.close();
     } // end of main
 } // end of Main class
