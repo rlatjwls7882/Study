@@ -25,13 +25,15 @@ public class Main {
         	sum += h[i];
         
         // 일곱 난쟁이에 포함되지 않는 난쟁이 계산
+        boolean end = false;
         int except1=0, except2=0;
         
-        for(int i=0;i<9;i++)
+        for(int i=0;i<9&&!end;i++)
         	for(int j=i+1;j<9;j++)
         		if(sum-h[i]-h[j]==100) {
         			except1=i;
         			except2=j;
+        			end=true;
         			break;
         		}
         
