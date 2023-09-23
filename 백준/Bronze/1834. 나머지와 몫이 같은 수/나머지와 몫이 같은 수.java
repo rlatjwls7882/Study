@@ -13,10 +13,8 @@ public class Main {
         long N = Long.valueOf(br.readLine());
         
         // N으로 나눴을 때 몫과 나머지가 같은 수의 합 계산
-        long sum=0;
-        
-        for(int i=1;i<N;i++)
-        	sum += N*i+i;
+        // i이 1~N-1까지 (N+1)i의 합
+        long sum=N*(N-1)*(N+1)/2;
         
         // N으로 나눴을 때 몫과 나머지가 같은 수의 합 출력
         bw.write(sum+"");
