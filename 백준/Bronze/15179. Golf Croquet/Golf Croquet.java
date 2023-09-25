@@ -21,13 +21,20 @@ public class Main {
         int[] score = new int[2];
         
         for(int i=0;i<S;i++) {
+        
+        	// 1점 득점
         	if(game.charAt(i)=='H')
         		score[i%2]++;
+
+        	// 2점 득점
         	else if(game.charAt(i)=='D')
         		score[i%2]+=2;
+
+        	// 1점 실점
         	else if(game.charAt(i)=='O')
         		score[(i+1)%2]++;
         	
+        	// 게임 종료
         	if(score[0]>=7||score[1]>=7) break;
         }
         
