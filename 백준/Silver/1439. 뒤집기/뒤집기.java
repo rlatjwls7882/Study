@@ -13,18 +13,13 @@ public class Main {
         String S = br.readLine();
         
         // 연속된 1의 덩어리와 0의 덩어리의 개수 계산
-        int index=0, mass1=0, mass0=0;
+        int mass1=0, mass0=0;
         
-        while(S.indexOf("01",index)!=-1) {
-        	mass1++;
-        	index = S.indexOf("01",index)+1;
-        }
-        
-        index=0;
-        while(S.indexOf("10",index)!=-1) {
-        	mass0++;
-        	index = S.indexOf("10",index)+1;
-        }
+        for(int i=1;i<S.length();i++)
+        	if(S.charAt(i-1)=='0'&&S.charAt(i)=='1')
+        		mass1++;
+        	else if(S.charAt(i-1)=='1'&&S.charAt(i)=='0')
+        		mass0++;
         
         if(S.charAt(0)=='0')
         	mass0++;
