@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -11,10 +10,7 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         // 방 생성
-        ArrayList<Integer> room = new ArrayList<Integer>();
-        
-        for(int i=0;i<10;i++)
-        	room.add(0);
+        int[] room = new int[10];
         
         // n 길이의 이벤트 입력
         int n = Integer.valueOf(br.readLine());
@@ -23,21 +19,31 @@ public class Main {
         for(int i=0;i<n;i++) {
         	
         	// 왼쪽으로 들어온 손님
-        	if(event.charAt(i)=='L')
-        		room.set(room.indexOf(0), 1);
+        	if(event.charAt(i)=='L') {
+        		for(int j=0;j<=9;j++)
+        			if(room[j]==0) {
+        				room[j]=1;
+        				break;
+        			}
+        	}
         	
         	// 오른쪽으로 들어온 손님
-        	else if(event.charAt(i)=='R')
-        		room.set(room.lastIndexOf(0), 1);
+        	else if(event.charAt(i)=='R') {
+        		for(int j=9;j>=0;j--)
+        			if(room[j]==0) {
+        				room[j]=1;
+        				break;
+        			}
+        	}
         	
         	// 손님이 방을 떠나는 경우
         	else
-        		room.set(event.charAt(i)-'0', 0);
+        		room[event.charAt(i)-'0']=0;
         }
         
         // 현재 방이 차있는 상태 출력
         for(int i=0;i<10;i++)
-        	bw.write(room.get(i)+"");
+        	bw.write(room[i]+"");
         
         bw.close();
     } // end of main
