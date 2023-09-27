@@ -23,13 +23,23 @@ public class Main {
         	sum += enemy[i];
         }
         
+        // 보스의 위치 계산
+        int bossindex=0;
+        sum/=2;
+        
+        for(int i=0;i<n;i++)
+        	if(enemy[i]==sum) {
+        		bossindex=i;
+        		break;
+        	}
+        
         // 보스를 제외한 적 출력
         for(int i=0;i<n;i++)
-        	if(enemy[i]!=sum/2)
+        	if(i!=bossindex)
         		bw.write(enemy[i]+" ");
         
         // 보스 출력
-        bw.write(sum/2+"");
+        bw.write(sum+"");
         
         bw.close();
     } // end of main
