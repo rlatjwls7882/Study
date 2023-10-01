@@ -31,12 +31,10 @@ public class Main {
 			int cnt=0, index=L;
 			
 			while(true) {
-				try {
-					index = lions[index-1];
-					cnt++;
-				} catch (Exception e) {
-					break;
-				}
+				if(index==0) break;
+
+				index = lions[index-1];
+				cnt++;
 			}
 			
 			// 사자의 (자신을 포함한) 조상의 수 출력
