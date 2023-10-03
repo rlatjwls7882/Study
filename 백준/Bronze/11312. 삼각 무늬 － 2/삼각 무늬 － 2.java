@@ -17,11 +17,11 @@ public class Main {
 			
 			// A, B 입력
 			StringTokenizer st = new StringTokenizer(br.readLine());
-			double A = Double.valueOf(st.nextToken());
-			double B = Double.valueOf(st.nextToken());
+			long A = Long.valueOf(st.nextToken());
+			long B = Long.valueOf(st.nextToken());
 			
 			// 길이가 A인 정삼각형을 덮을 수 있는 길이가 B인 정삼각형의 개수 계산
-			bw.write((long)Math.pow(Math.ceil(A/B), 2)+"\n");
+			bw.write(A*A/B/B+"\n");
 		}
 		
 		bw.close();
