@@ -15,17 +15,8 @@ public class Main {
 		int X = Integer.valueOf(st.nextToken());
 		int Y = Integer.valueOf(st.nextToken());
 		
-		// 선두가 꼴찌를 추월하게 되는 바퀴 수 계산
-		int track=0;
-		
-		for(double i=1;;i++)
-			if(i+1<=Y*i/X) {
-				track=(int)i+1;
-				break;
-			}
-		
 		// 선두가 꼴찌를 추월하게 되는 바퀴 수 출력
-		bw.write(track+"");
+		bw.write((int)Math.ceil(X/(double)(Y-X))+1+"");
 		
 		bw.close();
 	} // end of main()
