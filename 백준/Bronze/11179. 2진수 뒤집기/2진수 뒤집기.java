@@ -9,7 +9,6 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-
 		// 10진수 N을 이진수로 변환
 		StringBuilder N = new StringBuilder(Integer.toBinaryString(Integer.valueOf(br.readLine())));
 		
