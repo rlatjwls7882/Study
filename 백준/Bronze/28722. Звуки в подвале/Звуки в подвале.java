@@ -12,20 +12,8 @@ public class Main {
         // 문자열 s
         String s = br.readLine();
         
-        // 자를 수 있는 횟수 계산
-        int cut=0;
-        char before = s.charAt(0);
-        
-        for(int i=1;i<s.length();i++) {
-        	
-        	if(before!=s.charAt(i))
-        		cut++;
-        	
-        	before = s.charAt(i);
-        }
-        
         // 빌이 이길 수 있는지 확인
-        bw.write(cut%2==1?"Win":"Lose");
+        bw.write(s.charAt(0)!=s.charAt(s.length()-1)?"Win":"Lose");
         
         bw.close();
     } // end of main
