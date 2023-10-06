@@ -11,20 +11,20 @@ class Main{
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		// 암호 P와 K
+		// 암호 K와 L
 		StringTokenizer st = new StringTokenizer(bf.readLine());
-		BigInteger P = new BigInteger(st.nextToken());
 		BigInteger K = new BigInteger(st.nextToken());
+		BigInteger L = new BigInteger(st.nextToken());
 
 		// 두 소수중 작은 값 p 계산
 		BigInteger p = BigInteger.TWO;
 
-		for(;p.compareTo(K)<0;p = p.add(BigInteger.ONE))
-			if(P.remainder(p)==BigInteger.ZERO)
+		for(;p.compareTo(L)<0;p = p.add(BigInteger.ONE))
+			if(K.remainder(p)==BigInteger.ZERO)
 				break;
 
 		// 좋은 암호인지 판단
-		bw.write(String.format("%s", p.compareTo(K)>=0?"GOOD":"BAD "+p));
+		bw.write(String.format("%s", p.compareTo(L)>=0?"GOOD":"BAD "+p));
 		
 		bw.close();
 	} // end of main
