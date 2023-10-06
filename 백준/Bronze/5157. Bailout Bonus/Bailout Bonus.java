@@ -23,6 +23,9 @@ public class Main {
         	int n = Integer.valueOf(st.nextToken());
         	int r = Integer.valueOf(st.nextToken());
         	
+        	// 정부가 세금으로 회수하는 구제금 계산
+        	long Totaltax=0;
+        	
         	if(B!=0) {
         		
         		// 구제금을 받은 B개의 회사 목록
@@ -32,9 +35,7 @@ public class Main {
         		while(B-->0)
         			company.put(st.nextToken(), 0L);
         		
-        		// 정부가 세금으로 회수하는 구제금 계산
-        		long Totaltax=0;
-        		
+        		// 구제금 회수
         		while(n-->0) {
         			
         			// 이사진이 일하고 있는 회사 c, 받은 상여금 p
@@ -45,18 +46,15 @@ public class Main {
         			if(company.containsKey(c))
         				Totaltax += p*r/100;
         		}
-        		
-        		bw.write(String.format("Data Set %d:\n%d\n\n", caseNum, Totaltax));
         	}
         	
         	// 구제금을 받은 회사가 없는 경우
         	else {
-        		
         		while(n-->-1)
         			br.readLine();
-        		
-        		bw.write(String.format("Data Set %d:\n0\n\n", caseNum));
         	}
+        	
+        	bw.write(String.format("Data Set %d:\n%d\n\n", caseNum, Totaltax));
         }
         
         bw.close();
