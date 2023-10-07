@@ -23,11 +23,11 @@ public class Main {
         for(int i=0;i<word.length();i++)
         	second[word.charAt(i)-'a']++;
         
-        // 두 단어가 애너그램에 있도록 제거해야하는 문자의 최소 개수 계산
+        // 두 단어가 애너그램이 되도록 제거해야하는 문자의 최소 개수 계산
         int remove=0;
         
         for(int i=0;i<26;i++)
-        	remove += Math.max(Math.abs(first[i]-second[i]), 0);
+        	remove += Math.abs(first[i]-second[i]);
         
         bw.write(remove+"");
         
