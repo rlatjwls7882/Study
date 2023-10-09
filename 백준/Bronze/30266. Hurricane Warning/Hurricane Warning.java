@@ -25,13 +25,11 @@ public class Main {
     			
     			String receive = br.readLine();
     			
-    			canSend:
     			for(int i=0;i<m.length();i++)
-    				for(int j=0;j<receive.length();j++)
-    					if(m.charAt(i)==receive.charAt(j)) {
-    						cnt++;
-    						break canSend;
-    					}
+    				if(receive.indexOf(m.charAt(i))!=-1) {
+    					cnt++;
+    					break;
+    				}
     		}
     		
     		bw.write(String.format("Data Set %d:\n%d\n\n", numCases, cnt));
