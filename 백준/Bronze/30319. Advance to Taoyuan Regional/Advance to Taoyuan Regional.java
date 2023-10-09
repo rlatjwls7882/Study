@@ -21,8 +21,7 @@ public class Main {
     	LocalDate taoyuan = LocalDate.of(2023, 10, 21);
     	
     	// 대회 날짜가 적절한지 확인
-    	bw.write(contest.getDayOfYear()+contest.getYear()*365+35
-                 <=taoyuan.getDayOfYear()+taoyuan.getYear()*365?"GOOD":"TOO LATE");
+    	bw.write(contest.getDayOfYear()+35<=taoyuan.getDayOfYear()?"GOOD":"TOO LATE");
     	
     	bw.close();
     } // end of main
