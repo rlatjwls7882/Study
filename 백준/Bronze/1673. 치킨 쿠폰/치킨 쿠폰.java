@@ -12,10 +12,12 @@ public class Main {
 
 		while (true) {
 			try {
+				// 치킨 쿠폰의 개수 n, 치킨 한마리 교환할 때 필요한 쿠폰의 수 k
 				StringTokenizer st = new StringTokenizer(br.readLine());
 				int n = Integer.valueOf(st.nextToken());
 				int k = Integer.valueOf(st.nextToken());
 				
+				// 먹을 수 있는 치킨의 수 계산
 				int totalChicken = n;
 				while (n/k!=0) {
 					int tmp = n/k;
