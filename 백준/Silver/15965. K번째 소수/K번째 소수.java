@@ -9,28 +9,23 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
+        boolean[] NotSosu = new boolean[10000000];
+        
+        for(int i=2;i*i<=10000000;i++)
+        	if(!NotSosu[i])
+        		for(int j=i*i;j<10000000;j+=i)
+        			NotSosu[j]=true;
+        
+        // K번째 소수 출력
         int K = Integer.valueOf(br.readLine());
         
-        // K번째 소수 계산
-        int sosu=2;
-        while(K>1)
-        	for(int i=3;;i++) {
-        		
-        		boolean isSosu=true;
-        		for(int j=2;j*j<=i;j++)
-        			if(i%j==0) {
-        				isSosu=false;
-        				break;
-        			}
-        		
-        		if(isSosu) {
-        			sosu=i;
-        			K--;
-        		}
-        		if(K==1) break;
+        for(int i=2;;i++) {
+        	if(!NotSosu[i]) K--;
+        	if(K==0) {
+        		bw.write(i+"");
+        		break;
         	}
-        
-        bw.write(sosu+"");
+        }
         
         bw.close();
     } // end of main
