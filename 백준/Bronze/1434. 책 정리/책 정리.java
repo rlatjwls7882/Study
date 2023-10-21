@@ -15,29 +15,18 @@ public class Main {
 		int N = Integer.valueOf(st.nextToken());
 		int M = Integer.valueOf(st.nextToken());
 		
-		// 박스의 용량 A
-		int[] box = new int[N];
-		st = new StringTokenizer(br.readLine());
-		
-		for(int i=0;i<N;i++)
-			box[i] = Integer.valueOf(st.nextToken());
-		
-		// 모든 책 집어넣기
-		st = new StringTokenizer(br.readLine());
-		int idx=0;
-		
-		while(M-->0) {
-			int book = Integer.valueOf(st.nextToken());
-			
-			if(box[idx]<book) idx++;
-			box[idx]-=book;
-		}
-		
-		// 낭비되는 용량 계산
+		// 박스의 용량
 		int space=0;
-		for(int i=0;i<N;i++)
-			space += box[i];
-
+		st = new StringTokenizer(br.readLine());
+		while(N-->0)
+			space += Integer.valueOf(st.nextToken());
+		
+		// 책의 용량
+		st = new StringTokenizer(br.readLine());
+		while(M-->0)
+			space -= Integer.valueOf(st.nextToken());
+		
+		// 낭비되는 용량 출력
 		bw.write(space+"");
 		
 		bw.close();
