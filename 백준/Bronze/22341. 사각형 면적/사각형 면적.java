@@ -23,8 +23,8 @@ public class Main {
 			int tmpy = Integer.valueOf(st.nextToken());
 			if(tmpx>=x||tmpy>=y) continue;
 			
-			if(x*tmpy>=y*tmpx) y=tmpy;
-			else x=tmpx;
+			if(y*tmpx>=x*tmpy) x=tmpx;
+			else y=tmpy;
 		}
 		
 		// 마지막에 남는 종이의 면적 출력
