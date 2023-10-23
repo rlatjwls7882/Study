@@ -12,37 +12,26 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		// 자료구조의 종류
 		int N = Integer.valueOf(br.readLine());
-		
-		int[] A = new int[N];
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		for(int i=0;i<N;i++)
-			A[i] = Integer.valueOf(st.nextToken());
-		
-		// 들어있는 원소
-		int[] B = new int[N];
-		st = new StringTokenizer(br.readLine());
-		for(int i=0;i<N;i++)
-			B[i] = Integer.valueOf(st.nextToken());
-		
-		// 삽입할 원소
-		int M = Integer.valueOf(br.readLine());
-		
-		int[] C = new int[M];
-		st = new StringTokenizer(br.readLine());
-		for(int i=0;i<M;i++)
-			C[i] = Integer.valueOf(st.nextToken());
+		StringTokenizer A = new StringTokenizer(br.readLine());
+		StringTokenizer B = new StringTokenizer(br.readLine());
 		
 		// deque 생성(stack일때는 변화가 없으니 queue일때만 원소 받아오기)
 		Deque<Integer> deque = new ArrayDeque<Integer>();
-		for(int i=0;i<N;i++)
-			if(A[i]==0)
-				deque.add(B[i]);
+		for(int i=0;i<N;i++) {
+			if(A.nextToken().equals("0")) {
+				deque.add(Integer.valueOf(B.nextToken()));
+			} else {
+				B.nextToken();
+			}
+		}
 		
 		// 원소 삽입(queue에 들어있는 원소만 한칸씩 밀림)
+		int M = Integer.valueOf(br.readLine());
+		StringTokenizer C = new StringTokenizer(br.readLine());
+		
 		for(int i=0;i<M;i++) {
-			deque.addFirst(C[i]);
+			deque.addFirst(Integer.valueOf(C.nextToken()));
 			bw.write(deque.pollLast()+" ");
 		}
 		
