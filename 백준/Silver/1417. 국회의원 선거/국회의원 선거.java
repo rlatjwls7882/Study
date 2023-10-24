@@ -13,18 +13,18 @@ public class Main {
 
 		// 후보자 N명의 득표수 입력
 		int N = Integer.valueOf(br.readLine());
-		int candidate1 = Integer.valueOf(br.readLine());
+		int Dasom = Integer.valueOf(br.readLine());
 		
-		PriorityQueue<Integer> candidate = new PriorityQueue<>(Collections.reverseOrder());
+		PriorityQueue<Integer> other = new PriorityQueue<>(Collections.reverseOrder());
 		while(N-->1)
-			candidate.add(Integer.valueOf(br.readLine()));
+			other.add(Integer.valueOf(br.readLine()));
 		
 		// 매수해야 하는 사람의 최솟값 계산
 		int cnt=0;
-		if(!candidate.isEmpty())
-			while(candidate.peek()>=candidate1) {
-				candidate.add(candidate.poll()-1);
-				candidate1++;
+		if(!other.isEmpty())
+			while(other.peek()>=Dasom) {
+				other.add(other.poll()-1);
+				Dasom++;
 				cnt++;
 			}
 		
