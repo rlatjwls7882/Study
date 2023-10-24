@@ -3,8 +3,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.LinkedList;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
@@ -18,7 +17,7 @@ public class Main {
 		int cnt=0;
 		while(N-->0) {
 			String word = br.readLine();
-			Deque<Character> stack = new ArrayDeque<>();
+			LinkedList<Character> stack = new LinkedList<>();
 			
 			for(int i=0;i<word.length();i++) {
 				if(stack.isEmpty()||stack.peek()!=word.charAt(i))
