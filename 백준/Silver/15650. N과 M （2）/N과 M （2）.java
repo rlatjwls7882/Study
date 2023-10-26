@@ -24,7 +24,7 @@ public class Main {
 		// 방문한 노드를 담을 배열 arr
 		arr = new int[M];
 		
-		// 1부터 N까지 M개를 고른 수열 출력
+		// 1부터 N까지 중복없이 M개를 고른 수열 출력
 		dfs(1, 0);
 		
 		bw.write(sb.toString());
