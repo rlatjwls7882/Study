@@ -12,6 +12,7 @@ public class Main {
 	static int N;
 	static int M;
 	static int[] arr;
+	static StringBuilder sb = new StringBuilder();
 	
 	public static void main(String[] args) throws IOException {
 
@@ -20,22 +21,23 @@ public class Main {
 		N = Integer.valueOf(st.nextToken());
 		M = Integer.valueOf(st.nextToken());
 		
-		// 방문한 노드를 담을 배열 arr, 방문한 노드를 확인할 배열 visited
+		// 방문한 노드를 담을 배열 arr
 		arr = new int[M];
 		
-		// 백트랙킹 수행
+		// 1부터 N까지 M개를 고른 수열 출력
 		dfs(1, 0);
 		
+		bw.write(sb.toString());
 		bw.close();
 	} // end of main()
 	
-	static void dfs(int start, int length) throws IOException {
+	static void dfs(int start, int length) {
 		
 		// 길이가 M인 경우 출력
 		if(length==M) {
 			for(int i:arr)
-				bw.write(i+" ");
-			bw.write("\n");
+				sb.append(i).append(' ');
+			sb.append('\n');
 			
 			return;
 		}
