@@ -31,7 +31,7 @@ public class Main {
 		bw.close();
 	} // end of main()
 	
-	static void dfs(int start, int length) throws IOException {
+	static void dfs(int start, int length) {
 		
 		// 길이가 M인 경우 출력
 		if(length==M) {
