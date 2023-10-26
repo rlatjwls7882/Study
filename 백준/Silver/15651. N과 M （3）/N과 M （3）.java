@@ -12,6 +12,7 @@ public class Main {
 	static int N;
 	static int M;
 	static int[] arr;
+	static StringBuilder sb = new StringBuilder();
 	
 	public static void main(String[] args) throws IOException {
 
@@ -26,6 +27,7 @@ public class Main {
 		// 1부터 N까지 M개를 고른 수열 출력
 		dfs(0);
 		
+		bw.write(sb.toString());
 		bw.close();
 	} // end of main()
 	
@@ -34,8 +36,8 @@ public class Main {
 		// 길이가 M인 경우 출력
 		if(length==M) {
 			for(int i:arr)
-				bw.write(i+" ");
-			bw.write("\n");
+				sb.append(i).append(' ');
+			sb.append('\n');
 			
 			return;
 		}
