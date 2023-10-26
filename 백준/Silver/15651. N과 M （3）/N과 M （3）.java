@@ -24,14 +24,14 @@ public class Main {
 		// 방문한 노드를 담을 배열 arr
 		arr = new int[M];
 		
-		// 1부터 N까지 M개를 고른 수열 출력
+		// 1부터 N까지 중복하여 M개를 고른 수열 출력
 		dfs(0);
 		
 		bw.write(sb.toString());
 		bw.close();
 	} // end of main()
 	
-	static void dfs(int length) throws IOException {
+	static void dfs(int length) {
 		
 		// 길이가 M인 경우 출력
 		if(length==M) {
