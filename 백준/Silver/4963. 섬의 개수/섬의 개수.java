@@ -40,7 +40,7 @@ public class Main {
 					}
 			}
 			
-			// 각 단지에 속하는 집의 수 계산
+			// 섬의 개수 계산
 			ArrayList<Integer> houseNum = new ArrayList<>();
 			for(int i=0;i<M;i++)
 				for(int j=0;j<N;j++)
