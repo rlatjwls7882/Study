@@ -3,12 +3,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 public class Main {
-	static LinkedHashSet<String> set = new LinkedHashSet<>();
+	static StringBuilder sb = new StringBuilder();
 	
 	static int N;
 	static int M;
@@ -25,12 +24,16 @@ public class Main {
 		M = Integer.valueOf(st.nextToken());
 		
 		// 뽑을 수의 종류 node
-		node = new int[N];
-		
+		TreeSet<Integer> set = new TreeSet<>();
 		st = new StringTokenizer(br.readLine());
 		for(int i=0;i<N;i++)
-			node[i] = Integer.valueOf(st.nextToken());
-		Arrays.sort(node);
+			set.add(Integer.valueOf(st.nextToken()));
+		
+		N = set.size();
+		node = new int[N];
+		
+		for(int i=0;i<N;i++)
+			node[i]=set.pollFirst();
 		
 		// 현재 방문중인 목록 visitList
 		visitList = new int[M];
@@ -38,9 +41,7 @@ public class Main {
 		// 길이 M의 중복순열 출력
 		dfs(0);
 		
-		for(String val:set)
-			bw.write(val);
-		
+		bw.write(sb.toString());
 		bw.close();
 	} // end of main()
 	
@@ -48,12 +49,10 @@ public class Main {
 		
 		// 총 M개를 방문한 경우
 		if(depth==M) {
-			StringBuilder sb = new StringBuilder();
 			for(int val:visitList)
 				sb.append(val).append(' ');
 			sb.append('\n');
 			
-			set.add(sb.toString());
 			return;
 		}
 		
