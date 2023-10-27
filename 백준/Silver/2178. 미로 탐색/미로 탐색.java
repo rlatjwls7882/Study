@@ -7,79 +7,79 @@ import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 public class Main {
+	
+	static int N;
+	static int M;
+	static int[] moveX = {1, -1, 0, 0};
+	static int[] moveY = {0, 0, 1, -1};
+	static boolean[][] visited;
+	static int[][] move;
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		// 미로의 열 수 N, 행 수 M
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int N = Integer.valueOf(st.nextToken());
-		int M = Integer.valueOf(st.nextToken());
+		N = Integer.valueOf(st.nextToken());
+		M = Integer.valueOf(st.nextToken());
 		
 		// 미로 입력
-		boolean[][] maze = new boolean[N][M];
+		visited = new boolean[N][M];
+		move = new int[N][M];
 		
 		for(int i=0;i<N;i++) {
 			String string = br.readLine();
 			for(int j=0;j<M;j++)
-				if(string.charAt(j)=='1')
-					maze[i][j]=true;
+				if(string.charAt(j)=='1') {
+					visited[i][j]=true;
+				}
 		}
 		
 		// 도착지점까지 움직이는 최소 횟수 계산
+		bfs(0, 0);
+		bw.write(move[N-1][M-1]+"");
+		
+		bw.close();
+	} // end of main()
+	
+	static void bfs(int x, int y) {
 		LinkedList<Pos> queue = new LinkedList<>();
-		queue.add(new Pos(0, 0, 1));
-		maze[0][0]=false;
-		int moveCnt=0;
+		queue.add(new Pos(x, y));
+		
+		visited[x][y]=false;
+		move[x][y]=1;
 		
 		while(!queue.isEmpty()) {
 			
-			Pos tmp = queue.poll();
+			Pos pos = queue.poll();
 			
-			// 위
-			if(tmp.y-1>=0&&maze[tmp.y-1][tmp.x]) {
-				queue.add(new Pos(tmp.x, tmp.y-1, tmp.move+1));
-				maze[tmp.y-1][tmp.x]=false;
-			}
-			
-			// 아래
-			if(tmp.y+1<N&&maze[tmp.y+1][tmp.x]) {
-				queue.add(new Pos(tmp.x, tmp.y+1, tmp.move+1));
-				maze[tmp.y+1][tmp.x]=false;
-			}
-			
-			// 왼쪽
-			if(tmp.x-1>=0&&maze[tmp.y][tmp.x-1]) {
-				queue.add(new Pos(tmp.x-1, tmp.y, tmp.move+1));
-				maze[tmp.y][tmp.x-1]=false;
-			}
-			
-			// 오른쪽
-			if(tmp.x+1<M&&maze[tmp.y][tmp.x+1]) {
-				queue.add(new Pos(tmp.x+1, tmp.y, tmp.move+1));
-				maze[tmp.y][tmp.x+1]=false;
+			// 이동
+			for(int i=0;i<4;i++) {
+				int nextX = pos.x+moveX[i];
+				int nextY = pos.y+moveY[i];
+				
+				if(nextX<0||nextX>=M||nextY<0||nextY>=N||!visited[nextY][nextX])
+					continue;
+				
+				queue.add(new Pos(nextX, nextY));
+				visited[nextY][nextX]=false;
+				move[nextY][nextX]=move[pos.y][pos.x]+1;
 			}
 			
 			// 도착지점 도달
-			if(tmp.x==M-1&&tmp.y==N-1) {
-				moveCnt=tmp.move;
-				break;
-			}
+			if(pos.x==M-1&&pos.y==N-1)
+				return;
 		}
-		
-		bw.write(moveCnt+"");
-		bw.close();
-	} // end of main()
+	} // end of bfs()
 } // end of Main class
 
 class Pos {
 	int x;
 	int y;
-	int move;
 	
-	public Pos(int x, int y, int move) {
+	public Pos(int x, int y) {
 		this.x=x;
 		this.y=y;
-		this.move=move;
-	}
+	} // end of Pos()
 } // end of Pos class
