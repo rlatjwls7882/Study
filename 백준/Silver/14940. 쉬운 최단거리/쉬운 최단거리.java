@@ -19,7 +19,7 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		// 지도의 크기 M*N
+		// 지도의 크기 N*M
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.valueOf(st.nextToken());
 		M = Integer.valueOf(st.nextToken());
