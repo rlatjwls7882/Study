@@ -20,14 +20,13 @@ public class Main {
 		
 		while(N-->0) {
 			String ring = br.readLine();
-			ring+=ring;
 			
 			int idx=0;
 			for(int i=0;i<20;i++) {
-				while(idx>0&&ring.charAt(i)!=string.charAt(idx))
+				while(idx>0&&ring.charAt(i%10)!=string.charAt(idx))
 					idx=table[idx-1];
 				
-				if(ring.charAt(i)==string.charAt(idx)) {
+				if(ring.charAt(i%10)==string.charAt(idx)) {
 					if(idx==stringLen-1) {
 						cnt++;
 						break;
