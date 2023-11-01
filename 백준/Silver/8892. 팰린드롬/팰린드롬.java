@@ -22,8 +22,8 @@ public class Main {
 			// 2개의 문자열을 골라 팰린드롬을 만들 수 있는지 확인
 			boolean isPalindrome = false;
 			
-			for(int i=0;i<N;i++)
-				for(int j=0;j<N;j++)
+			for(int i=0;i<N;i++) {
+				for(int j=0;j<N;j++) {
 					if(i!=j&&isPalindrome(strings[i], strings[j])) {
 						bw.write(strings[i]);
 						bw.write(strings[j]);
@@ -31,26 +31,25 @@ public class Main {
 						isPalindrome=true;
 						i=j=N;
 					}
+				}
+			}
 			
-			if(!isPalindrome) bw.write("0\n");
+			if(!isPalindrome) {
+				bw.write("0\n");
+			}
 		}
 		
 		bw.close();
 	} // end of main()
 	
 	static boolean isPalindrome(String s1, String s2) {
-		boolean isPalindrome=true;
-		
 		String string = s1+s2;
 		int length = string.length();
 		
 		for(int i=0;i<length/2;i++)
-			if(string.charAt(i)!=string.charAt(length-i-1)) {
-				isPalindrome=false;
-				break;
-			}
+			if(string.charAt(i)!=string.charAt(length-i-1))
+				return false;
 		
-		return isPalindrome;
-	}
-	
+		return true;
+	} // end of isPalindrome()
 } // end of Main class
