@@ -12,13 +12,13 @@ public class Main {
 		int N = Integer.valueOf(br.readLine());
 		
 		// N개의 정사각형으로 만들수 있는 직사각형의 개수 계산
-		int sum=0;
+		int cnt=0;
 		for(int i=1;i<=N;i++)
 			for(int j=1;j*j<=i;j++)
 				if(i%j==0)
-					sum++;
+					cnt++;
 		
-		bw.write(Integer.toString(sum));
+		bw.write(Integer.toString(cnt));
 		
 		bw.close();
 	} // end of main()
