@@ -17,7 +17,7 @@ public class Main {
 		// N개의 원소를 뒤집어서 정렬
 		PriorityQueue<Long> sort = new PriorityQueue<>();
 		
-		while(N>0) {
+		while(N>0) { // 입력에 빈줄이 존재
 			if(!st.hasMoreTokens()) {
 				st = new StringTokenizer(br.readLine());
 			} if(st.hasMoreTokens()) {
