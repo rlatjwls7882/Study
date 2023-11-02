@@ -19,7 +19,8 @@ public class Main {
 			sum += Long.valueOf(br.readLine());
 			
 			// 만들 수 있는 가장 큰 2의 거듭제곱 값(2진수로 나타냈을 때의 최상위 비트) 계산
-			bw.write(Long.highestOneBit(sum)+"\n");
+			bw.write(Long.toString(Long.highestOneBit(sum)));
+			bw.newLine();
 		}
 
 		bw.close();
