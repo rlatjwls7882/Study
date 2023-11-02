@@ -3,8 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Collections;
-import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -12,26 +10,17 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		// N개의 원소로 2048 진행
+		// 원소 N개의 합 계산
 		int N = Integer.valueOf(br.readLine());
 		
-		PriorityQueue<Long> pq = new PriorityQueue<>(Collections.reverseOrder());
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		
+		long sum=0;
 		while(N-->0) {
-			long a = Long.valueOf(st.nextToken());
-			
-			if(a!=0) {
-				while(pq.contains(a)) {
-					pq.remove(a);
-					a*=2;
-				}
-				pq.add(a);
-			}
+			sum += Long.valueOf(st.nextToken());
 		}
 		
-		// 만들 수 있는 가장 큰 값 출력
-		bw.write(Long.toString(pq.poll()));
+		// 만들 수 있는 가장 큰 값(2진수로 나타냈을 때의 제일 왼쪽의 비트) 계산
+		bw.write(Long.highestOneBit(sum)+"");
 
 		bw.close();
 	} // end of main()
