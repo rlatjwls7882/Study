@@ -15,18 +15,13 @@ public class Main {
 		int N = Integer.valueOf(st.nextToken());
 		int M = Integer.valueOf(st.nextToken());
 		
-		// 사각형 범위의 누적합 계산
+		// 범위의 누적합 계산
 		int[][] sum = new int[N+1][N+1];
 		for(int i=1;i<=N;i++) {
 			st = new StringTokenizer(br.readLine());
 			for(int j=1;j<=N;j++) {
-				sum[i][j] = Integer.valueOf(st.nextToken());
-			}
-		}
-		
-		for(int i=1;i<=N;i++) {
-			for(int j=1;j<=N;j++) {
-				sum[i][j] += sum[i-1][j]+sum[i][j-1]-sum[i-1][j-1];
+				sum[i][j] = Integer.valueOf(st.nextToken())
+						+sum[i-1][j]+sum[i][j-1]-sum[i-1][j-1];
 			}
 		}
 		
