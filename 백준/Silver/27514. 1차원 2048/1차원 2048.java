@@ -19,7 +19,7 @@ public class Main {
 			sum += Long.valueOf(st.nextToken());
 		}
 		
-		// 만들 수 있는 가장 큰 값(2진수로 나타냈을 때의 제일 왼쪽의 비트) 계산
+		// 만들 수 있는 가장 큰 값(2진수로 나타냈을 때의 최상위 비트) 계산
 		bw.write(Long.highestOneBit(sum)+"");
 
 		bw.close();
