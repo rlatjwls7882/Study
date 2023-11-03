@@ -17,23 +17,24 @@ public class Main {
 		
 		// 수열의 누적합 계산
 		st = new StringTokenizer(br.readLine());
-		int[] array = new int[N+1];
-		for(int i=0;i<N;i++)
-			array[i] = Integer.valueOf(st.nextToken());
-		
-		// 합이 M이 되는 경우의 수 계산
-		int left=0, right=0, cnt=0, sum=0;
-		while(right<=N) {
-			if(sum<=M) {
-				if(sum==M) {
-					cnt++;
-				}
-				sum+=array[right++];
-			} else {
-				sum-=array[left++];
-			}
+		int[] arr = new int[N+1];
+		for(int i=1;i<=N;i++) {
+			arr[i] = arr[i-1]+Integer.valueOf(st.nextToken());
 		}
 		
+		// 합이 M이 되는 경우의 수 계산
+		int left=0, right=1, cnt=0;
+		while(right<=N) {
+			if(arr[right]-arr[left]==M) {
+				cnt++;
+				left++;
+			} else if(arr[right]-arr[left]>M) {
+				left++;
+			} else {
+				right++;
+			}
+		}
+
 		bw.write(Integer.toString(cnt));
 
 		bw.close();
