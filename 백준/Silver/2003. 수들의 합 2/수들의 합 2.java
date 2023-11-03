@@ -15,26 +15,25 @@ public class Main {
 		int N = Integer.valueOf(st.nextToken());
 		int M = Integer.valueOf(st.nextToken());
 		
-		// 수열의 누적합 계산
+		// 수열 입력
 		st = new StringTokenizer(br.readLine());
-		int[] arr = new int[N+1];
-		for(int i=1;i<=N;i++) {
-			arr[i] = arr[i-1]+Integer.valueOf(st.nextToken());
-		}
+		int[] array = new int[N+1];
+		for(int i=0;i<N;i++)
+			array[i] = Integer.valueOf(st.nextToken());
 		
 		// 합이 M이 되는 경우의 수 계산
-		int left=0, right=1, cnt=0;
+		int left=0, right=0, cnt=0, sum=0;
 		while(right<=N) {
-			if(arr[right]-arr[left]==M) {
-				cnt++;
-				left++;
-			} else if(arr[right]-arr[left]>M) {
-				left++;
+			if(sum<=M) {
+				if(sum==M) {
+					cnt++;
+				}
+				sum+=array[right++];
 			} else {
-				right++;
+				sum-=array[left++];
 			}
 		}
-
+		
 		bw.write(Integer.toString(cnt));
 
 		bw.close();
