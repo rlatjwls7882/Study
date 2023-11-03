@@ -18,7 +18,7 @@ public class Main {
 		long c = Long.valueOf(st.nextToken());
 		long d = Long.valueOf(st.nextToken());
 		
-		// f(x) = ax+b(x<=k), cx+d(x>k)가 x=k에서 연속하는지 확인
+		// f(x) = { ax+b(x<=k), cx+d(x>k) }가 x=k에서 연속하는지 확인
 		long first = a*k+b;
 		long second = c*k+d;
 		
