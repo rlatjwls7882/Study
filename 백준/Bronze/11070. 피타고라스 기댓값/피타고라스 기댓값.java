@@ -39,8 +39,8 @@ public class Main {
 			long max=0, min=Long.MAX_VALUE;
 			for(int i=0;i<n;i++) {
 				long Ex=0;
-				
-				if(score[i][0]!=0||score[i][1]!=0) {
+				if(score[i][0]==0&&score[i][1]==0||score[i][0]==0);
+				else {
 					Ex = (long)(score[i][0]*score[i][0]*1000
 							/(score[i][0]*score[i][0]+score[i][1]*score[i][1]));
 				}
