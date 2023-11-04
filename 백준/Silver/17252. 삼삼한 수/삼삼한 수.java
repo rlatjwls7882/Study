@@ -12,7 +12,7 @@ public class Main {
 		int N = Integer.valueOf(br.readLine());
 		
 		// N이 3의 중복없는 거듭제곱의 합으로 나타낼 수 있는지 확인
-		// = 3진법으로 나타냈을때 0과 1을 제외한 수가 있는지 확인
+		// = 3진법으로 나타냈을때 2가 있는지 확인
 		boolean isSamSam=true;
 
 		if(N==0) {
