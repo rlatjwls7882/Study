@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -58,12 +57,7 @@ public class Main {
 	} // end of main()
 	
 	static void dijkstra(int start) {
-		PriorityQueue<Node> pq = new PriorityQueue<>(new Comparator<Node>() {
-			@Override
-			public int compare(Node n1, Node n2) {
-				return n1.weight-n2.weight;
-			}
-		});
+		PriorityQueue<Node> pq = new PriorityQueue<>();
 		pq.offer(new Node(start, 0));
 		routeVal[start]=0;
 		
@@ -85,11 +79,16 @@ public class Main {
 	} // end of dijkstra()
 } // end of Main class
 
-class Node {
+class Node implements Comparable<Node> {
 	int pos, weight;
 	
 	public Node(int pos, int weight) {
 		this.pos=pos;
 		this.weight=weight;
-	}
+	} // end of Node()
+	
+	@Override
+	public int compareTo(Node n1) {
+		return this.weight-n1.weight;
+	} // end of compareTo()
 } // end of class Node
