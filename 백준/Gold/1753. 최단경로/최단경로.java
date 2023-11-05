@@ -65,6 +65,10 @@ public class Main {
 			Node curnode = pq.poll();
 			start = curnode.pos;
 			
+			if(curnode.weight>routeVal[start]) {
+				continue;
+			}
+			
 			// 각각의 노드에 더 빨리 도착할 수 있는지 확인
 			for(Node nextNode:connect.get(start)) {
 				int end = nextNode.pos;
