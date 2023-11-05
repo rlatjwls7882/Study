@@ -44,7 +44,7 @@ public class Main {
 			start = curNode.end;
 			visited[start]=true;
 
-			if(routeVal[start]>=routeVal[end]) {
+			if(visited[end]) {
 				return;
 			}
 			
@@ -74,15 +74,15 @@ public class Main {
 } // end of Main class
 
 class Node implements Comparable<Node> {
-	int end, cost;
+	int end, time;
 	
-	public Node(int end, int cost) {
+	public Node(int end, int time) {
 		this.end=end;
-		this.cost=cost;
+		this.time=time;
 	}
 	
 	@Override
 	public int compareTo(Node node) {
-		return this.cost-node.cost;
+		return this.time-node.time;
 	}
 } // end of Node class
