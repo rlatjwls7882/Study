@@ -52,7 +52,8 @@ public class Main {
 		bw.newLine();
 		
 		for(int val:endNode.visit) {
-			bw.write(Integer.toString(val)+" ");
+			bw.write(Integer.toString(val));
+			bw.write(' ');
 		}
 		
 		bw.close();
