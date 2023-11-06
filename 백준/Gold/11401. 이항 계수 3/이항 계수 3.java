@@ -16,26 +16,29 @@ public class Main {
 		long N = Long.valueOf(st.nextToken());
 		long K = Long.valueOf(st.nextToken());
 		
-		// N!/(N-K)!K! % MOD 계산
-		bw.write(Long.toString(fact(N)*reversePow(fact(N-K)*fact(K)%MOD, MOD-2)%MOD));
+		// NCK = N!/(N-K)!K! % MOD 계산
+		bw.write(Long.toString(fact(N)*pow(fact(N-K)*fact(K)%MOD, MOD-2)%MOD));
 		
 		bw.close();
 	} // end of main()
 	
 	static long fact(long N) {
-		if(N<2) {
-			return 1;
+		long fact=1L;
+		
+		while(N>1) {
+			fact=fact*N%MOD;
+			N--;
 		}
 		
-		return N*fact(N-1)%MOD;
+		return fact;
 	} // end of fact()
 	
-	static long reversePow(long N, long K) {
-		long ret=1;
+	static long pow(long N, long K) {
+		long pow=1;
 		
 		while(K>0) {
 			if(K%2==1) {
-				ret = ret*N%MOD;
+				pow = pow*N%MOD;
 				K--;
 			}
 			
@@ -43,6 +46,6 @@ public class Main {
 			K>>=1;
 		}
 		
-		return ret;
-	} // end of reverseFact()
+		return pow;
+	} // end of pow()
 } // end of Main class
