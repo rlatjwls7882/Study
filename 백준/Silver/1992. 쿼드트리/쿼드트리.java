@@ -8,7 +8,6 @@ public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	static StringBuilder sb = new StringBuilder();
-	static int cntBlue, cntWhite;
 	static int[][] movie;
 	
 	public static void main(String[] args) throws IOException {
