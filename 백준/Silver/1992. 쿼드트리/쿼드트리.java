@@ -25,13 +25,13 @@ public class Main {
 		}
 		
 		// 영상 압축 결과 출력
-		cntPaper(0, 0, N);
+		zipMovie(0, 0, N);
 		bw.write(sb.toString());
 		
 		bw.close();
 	} // end of main()
 	
-	static void cntPaper(int startRow, int startCol, int length) {
+	static void zipMovie(int startRow, int startCol, int length) {
 		
 		
 		// 한 구역이 모두 같은 값인 경우
@@ -44,14 +44,14 @@ public class Main {
 		else {
 			int nextLength = length/2;
 			sb.append('(');
-			cntPaper(startRow, startCol, nextLength);
-			cntPaper(startRow, startCol+nextLength, nextLength);
-			cntPaper(startRow+nextLength, startCol, nextLength);
-			cntPaper(startRow+nextLength, startCol+nextLength, nextLength);
+			zipMovie(startRow, startCol, nextLength);
+			zipMovie(startRow, startCol+nextLength, nextLength);
+			zipMovie(startRow+nextLength, startCol, nextLength);
+			zipMovie(startRow+nextLength, startCol+nextLength, nextLength);
 			sb.append(')');
 		}
 		
-	} // end of cntSame()
+	} // end of zipMovie()
 	
 	static boolean isSameVal(int startRow, int startCol, int length) {
 		int firstVal=movie[startRow][startCol];
@@ -65,5 +65,5 @@ public class Main {
 		}
 		
 		return true;
-	} // end of isSameColor()
+	} // end of isSameVal()
 } // end of Main class
