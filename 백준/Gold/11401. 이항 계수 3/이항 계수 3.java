@@ -34,18 +34,18 @@ public class Main {
 	} // end of fact()
 	
 	static long pow(long N, long K) {
-		long pow=1;
 		
-		while(K>0) {
-			if(K%2==1) {
-				pow = pow*N%MOD;
-				K--;
-			}
-			
-			N=N*N%MOD;
-			K>>=1;
+		if(K==1) {
+			return N;
 		}
 		
-		return pow;
+		long tmp = pow(N, K/2);
+		
+		if(K%2==1) {
+			return (tmp*tmp%MOD)*N%MOD;
+		} else {
+			return tmp*tmp%MOD;
+		}
+		
 	} // end of pow()
 } // end of Main class
