@@ -45,39 +45,24 @@ public class Main {
 				int E = Integer.valueOf(st.nextToken());
 				int T = Integer.valueOf(st.nextToken());
 				
-				// 도로인 경우
-				if(i<M) {
+				
+				if(i<M) { // 도로인 경우
 					road.get(S).add(new Node(E, T));
 					road.get(E).add(new Node(S, T));
-				}
-				
-				// 웜홀인 경우
-				else {
+				} else { // 웜홀인 경우
 					road.get(S).add(new Node(E, -T));
 				}
 			}
 			
 			// 한 지점에서 시간이 줄어들면서 돌아올 수 있는지 확인
-			boolean timeRoop=false;
-			
-			for(int i=1;i<=N;i++) {
-				if (BellmanFord(i)) {
-					timeRoop=true;
-					bw.write("YES\n");
-					break;
-				}
-			}
-			
-			if(!timeRoop) {
-				bw.write("NO\n");
-			}
+            bw.write(BellmanFord()?"YES\n":"NO\n");
 		}
 		
 		bw.close();
 	} // end of main()
 	
-	static boolean BellmanFord(int start) {
-		routeVal[start]=0;
+	static boolean BellmanFord() {
+		routeVal[1]=0;
 		boolean isUpdating=false;
 		
 		// 최단거리 업데이트
@@ -88,7 +73,7 @@ public class Main {
 				for(Node nextNode:road.get(j)) {
 					int next = nextNode.end;
 					
-					if(routeVal[next]!=INF&&routeVal[next]>routeVal[j]+nextNode.weight) {
+					if(routeVal[next]>routeVal[j]+nextNode.weight) {
 						routeVal[next]=routeVal[j]+nextNode.weight;
 						isUpdating=true;
 					}
