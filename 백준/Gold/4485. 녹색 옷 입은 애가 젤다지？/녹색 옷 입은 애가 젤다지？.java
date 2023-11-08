@@ -32,7 +32,6 @@ public class Main {
 			
 			for(int i=0;i<N;i++) {
 				StringTokenizer st = new StringTokenizer(br.readLine());
-				Arrays.fill(map[i], 100_000_000);
 				
 				for(int j=0;j<N;j++) {
 					map[i][j] = Integer.valueOf(st.nextToken());
@@ -49,6 +48,12 @@ public class Main {
 	} // end of main()
 	
 	static void dijkstra() {
+		int[][] lose = new int[N][N];
+		for(int i=0;i<N;i++) {
+			Arrays.fill(lose[i], 100_000_000);
+		}
+		lose[0][0]=map[0][0];
+		
 		PriorityQueue<Node> pq = new PriorityQueue<>();
 		pq.add(new Node(0, 0, map[0][0]));
 		
@@ -70,8 +75,13 @@ public class Main {
 				int nextX = curX+moveX[i];
 				int nextY = curY+moveY[i];
 				
-				if(nextX>=0&&nextX<N&&nextY>=0&&nextY<N&&!visited[nextX][nextY]) {
-					pq.add(new Node(nextX, nextY, curNode.cost+map[nextX][nextY]));
+				if(nextX<0||nextX>=N||nextY<0||nextY>=N||visited[nextX][nextY]) {
+					continue;
+				}
+				
+				if(lose[nextX][nextY]>curNode.cost+map[nextX][nextY]) {
+					lose[nextX][nextY]=curNode.cost+map[nextX][nextY];
+					pq.add(new Node(nextX, nextY, lose[nextX][nextY]));
 				}
 			}
 		}
