@@ -6,10 +6,12 @@ import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        
         
         // 카드의 개수 N 입력
         int N = Integer.valueOf(br.readLine());
