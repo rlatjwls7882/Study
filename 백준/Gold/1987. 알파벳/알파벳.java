@@ -11,7 +11,6 @@ public class Main {
 	static int[] moveX = {1, -1, 0, 0};
 	static int[] moveY = {0, 0, 1, -1};
 	static boolean[] alpha = new boolean[26];
-	static boolean[][] visited;
 	static int R, C, maxSize;
 	static int[][] board;
 	
@@ -32,7 +31,6 @@ public class Main {
 		}
 		
 		// 말이 지날 수 있는 최대의 칸 수 계산
-		visited = new boolean[R][C];
 		dfs(0, 0, 1);
 		bw.write(Integer.toString(maxSize));
 		
@@ -40,7 +38,6 @@ public class Main {
 	} // end of main()
 	
 	static void dfs(int x, int y, int depth) {
-		visited[x][y]=true;
 		alpha[board[x][y]]=true;
 		
 		if(maxSize<depth) {
@@ -51,14 +48,13 @@ public class Main {
 			int nextX = x+moveX[i];
 			int nextY = y+moveY[i];
 
-			if(nextX<0||nextX>=R||nextY<0||nextY>=C||visited[nextX][nextY]||alpha[board[nextX][nextY]]) {
+			if(nextX<0||nextX>=R||nextY<0||nextY>=C||alpha[board[nextX][nextY]]) {
 				continue;
 			} else {
 				dfs(nextX, nextY, depth+1);
+				alpha[board[nextX][nextY]]=false;
 			}
 		}
 		
-		visited[x][y]=false;
-		alpha[board[x][y]]=false;
 	} // end of dfs()
 } // end of Main class
