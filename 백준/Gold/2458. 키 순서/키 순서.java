@@ -19,10 +19,10 @@ public class Main {
 		int M = Integer.valueOf(st.nextToken());
 		
 		// 각 학생의 노드 생성
-		int[][] height = new int[N][N];
+		int[][] stu = new int[N][N];
 		for(int i=0;i<N;i++) {
-			Arrays.fill(height[i], INF);
-			height[i][i]=0;
+			Arrays.fill(stu[i], INF);
+			stu[i][i]=0;
 		}
 		
 		// a에서 b로 향하는 간선 입력
@@ -30,14 +30,14 @@ public class Main {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.valueOf(st.nextToken())-1;
 			int b = Integer.valueOf(st.nextToken())-1;
-			height[a][b]=1;
+			stu[a][b]=1;
 		}
 		
 		// 한 노드에서 다른 노드로 가는 최단거리 계산
 		for(int mid=0;mid<N;mid++) {
 			for(int i=0;i<N;i++) {
 				for(int j=0;j<N;j++) {
-					height[i][j] = Math.min(height[i][j], height[i][mid]+height[mid][j]);
+					stu[i][j] = Math.min(stu[i][j], stu[i][mid]+stu[mid][j]);
 				}
 			}
 		}
@@ -48,7 +48,7 @@ public class Main {
 		for(int i=0;i<N;i++) {
 			boolean canCompare=true;
 			for(int j=0;j<N;j++) {
-				if(height[i][j]==INF&&height[j][i]==INF) {
+				if(stu[i][j]==INF&&stu[j][i]==INF) {
 					canCompare=false;
 					break;
 				}
