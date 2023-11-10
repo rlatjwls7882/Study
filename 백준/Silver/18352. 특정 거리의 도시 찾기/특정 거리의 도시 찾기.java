@@ -5,7 +5,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 
@@ -14,7 +15,6 @@ public class Main {
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	static ArrayList<ArrayList<Integer>> connect = new ArrayList<>();
 	static int INF=1_000_000_000;
-	static boolean[] visited;
 	static int[] routeVal;
 	
 	public static void main(String[] args) throws IOException {
@@ -29,7 +29,6 @@ public class Main {
 		// 초기화
 		routeVal = new int[N];
 		Arrays.fill(routeVal, INF);
-		visited = new boolean[N];
 		for(int i=0;i<N;i++) {
 			connect.add(new ArrayList<>());
 		}
@@ -43,7 +42,7 @@ public class Main {
 		}
 		
 		// 최단거리가 K인 도시 확인
-		dijkstra(X);
+		bfs(X);
 		
 		int cnt=0;
 		for(int i=0;i<N;i++) {
@@ -61,41 +60,21 @@ public class Main {
 		bw.close();
 	} // end of main()
 	
-	static void dijkstra(int start) {
-		PriorityQueue<Node> pq = new PriorityQueue<>();
-		pq.add(new Node(start, 0));
+	static void bfs(int start) {
+		Queue<Integer> q = new LinkedList<>();
 		routeVal[start]=0;
+		q.add(start);
 		
-		while(!pq.isEmpty()) {
-			Node curNode = pq.poll();
-			start=curNode.pos;
-			
-			if(visited[start]) {
-				continue;
-			}
-			visited[start]=true;
+		while(!q.isEmpty()) {
+			start=q.poll();
 			
 			for(int nextPos:connect.get(start)) {
 				if(routeVal[nextPos]>routeVal[start]+1) {
 					routeVal[nextPos]=routeVal[start]+1;
-					pq.add(new Node(nextPos, routeVal[nextPos]));
+					q.add(nextPos);
 				}
 			}
 		}
 		
-	} // end of dijkstra()
+	} // end of bfs()
 } // end of Main class
-
-class Node implements Comparable<Node> {
-	int pos, cost;
-	
-	public Node(int pos, int cost) {
-		this.pos=pos;
-		this.cost=cost;
-	}
-	
-	@Override
-	public int compareTo(Node node) {
-		return this.cost-node.cost;
-	}
-} // end of Node class
