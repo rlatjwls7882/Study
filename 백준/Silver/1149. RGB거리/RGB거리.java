@@ -28,7 +28,7 @@ public class Main {
 		}
 		
 		// 모든 집을 칠하는 최소 비용 출력
-		bw.write(Integer.toString(Math.min(cost[0], Math.min(cost[1], cost[2]))));
+		bw.write(Integer.toString(Math.min(Math.min(cost[0], cost[1]), cost[2])));
 		
 		bw.close();
 	} // end of main()
