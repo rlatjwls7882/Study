@@ -12,30 +12,24 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		
 		int N = Integer.valueOf(br.readLine());
-		
-		// 주가 입력, 특정 시점 전의 최솟값 계산
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int[] a = new int[N];
-		int[] min = new int[N];
+		
+		// 얻을 수 있는 최대 금액 계산
+		int max=0, min=1_000_000_000;
 		
 		for(int i=0;i<N;i++) {
-			a[i] = Integer.valueOf(st.nextToken());
 			
-			if(i>0) {
-				min[i] = Math.min(min[i-1], a[i]);
-			} else {
-				min[i] = a[i];
-			}
+			// 현재의 주가 입력
+			int a = Integer.valueOf(st.nextToken());
+			
+			// 각각의 날짜에서의 최솟값 계산
+			min = Math.min(min, a);
+			
+			// 이 전날의 최대 이익과, 오늘의 최대 이익중 큰값 계산
+			max = Math.max(max, a-min);
 		}
 		
-		// 각각의 날에 얻을 수 있는 최대 금액 계산
-		int[] max = new int[N];
-		
-		for(int i=1;i<N;i++) {
-			max[i] = Math.max(max[i-1], a[i]-min[i]);
-		}
-		
-		bw.write(Integer.toString(max[N-1]));
+		bw.write(Integer.toString(max));
 		
 		bw.close();
 	} // end of main()
