@@ -13,14 +13,13 @@ public class Main {
 		int N = Integer.valueOf(br.readLine());
 		
 		// 연속된 곱의 최댓값 계산
-		double[] dp = new double[N];
-		dp[0]=Double.valueOf(br.readLine());
-		double max=dp[0];
+		double dp = Double.valueOf(br.readLine());
+		double max=dp;
 		
 		for(int i=1;i<N;i++) {
 			double curVal = Double.valueOf(br.readLine());
-			dp[i] = Math.max(dp[i-1]*curVal, curVal);
-			max = Math.max(max, dp[i]);
+			dp = Math.max(dp*curVal, curVal);
+			max = Math.max(max, dp);
 		}
 		
 		bw.write(String.format("%.03f", max));
