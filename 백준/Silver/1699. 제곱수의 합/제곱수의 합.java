@@ -32,7 +32,7 @@ public class Main {
 			dp[i]=dp[i-sqrt*sqrt]+1;
 			sqrt--;
 			
-			// 18의 경우 4²+1²+1²이 아닌 3²+3²이 더 적음
+			// 18의 경우 4²+1²+1²보다 3²+3²이 항의 개수가 더 적음
 			while(sqrt>0) {
 				dp[i]=Math.min(dp[i-sqrt*sqrt]+1, dp[i]);
 				sqrt--;
