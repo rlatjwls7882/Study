@@ -27,21 +27,17 @@ public class Main {
 		
 		// 도서 대출이 모두 가능한지 확인
 		int K = Integer.valueOf(br.readLine());
-		boolean isOK=true;
+		int res = 1;
 		
 		for(int i=0;i<32;i++) {
 			if(borrow[i]>K) {
-				isOK=false;
+				res=0;
 				break;
 			}
 		}
-		
-		if(isOK) {
-			bw.write("1");
-		} else {
-			bw.write("0");
-		}
-		
+
+		bw.write(Integer.toString(res));
+
 		bw.close();
 	} // end of main()
 } // end of Main class
