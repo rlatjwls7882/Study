@@ -23,7 +23,7 @@ public class Main {
 			}
 		}
 		
-		// 원래 전화번호와 새 전화번호가 모두 소순인지 확인
+		// 원래 전화번호와 새 전화번호가 모두 소수인지 확인
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int original = Integer.valueOf(st.nextToken());
 		int plus = Integer.valueOf(st.nextToken())*1000000;
