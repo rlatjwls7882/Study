@@ -10,6 +10,7 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
+		StringBuilder sb = new StringBuilder();
 		int N = Integer.valueOf(br.readLine());
 		
 		for(int cases=1;cases<=N;cases++) {
@@ -32,8 +33,10 @@ public class Main {
 				dist += Math.abs(chars[i]);
 			}
 			
-			bw.write(String.format("Case #%d: %d\n", cases, dist));
+			sb.append("Case #").append(cases).append(": ").append(dist).append('\n');
 		}
+		
+		bw.write(sb.toString());
 		
 		bw.close();
 	} // end of main()
