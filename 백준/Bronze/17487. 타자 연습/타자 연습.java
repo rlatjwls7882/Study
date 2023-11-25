@@ -26,14 +26,14 @@ public class Main {
 			}
 			
 			boolean Continue = false;
+			if(string.charAt(i)<='Z') {
+				wild++;
+			}
 			
 			for(int j=0;j<leftChars.length();j++) {
 				if(string.charAt(i)==leftChars.charAt(j)||string.charAt(i)-32==leftChars.charAt(j)) {
 					left++;
 					Continue=true;
-					if(string.charAt(i)<='Z') {
-						wild++;
-					}
 					break;
 				}
 			}
@@ -45,9 +45,6 @@ public class Main {
 			for(int j=0;j<rightChars.length();j++) {
 				if(string.charAt(i)==rightChars.charAt(j)||string.charAt(i)-32==rightChars.charAt(j)) {
 					right++;
-					if(string.charAt(i)<='Z') {
-						wild++;
-					}
 					break;
 				}
 			}
