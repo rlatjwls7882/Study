@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		// 사진의 크기
+		// 첫번째 사진의 크기
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int N = Integer.valueOf(st.nextToken());
 		int M = Integer.valueOf(st.nextToken());
