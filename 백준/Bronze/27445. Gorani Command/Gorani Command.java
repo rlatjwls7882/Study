@@ -3,8 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -18,52 +16,40 @@ public class Main {
 		int N = Integer.valueOf(st.nextToken());
 		int M = Integer.valueOf(st.nextToken());
 		
-		// 고라니가 있을 수 있는 모든 좌표 생성
-		Deque<Pos> map = new ArrayDeque<>();
-		for(int i=0;i<N;i++) {
-			for(int j=0;j<M;j++) {
-				map.offer(new Pos(i, j));
-			}
-		}
-		
-		// 고라니가 숨어있는 칸의 좌표 계산
+		// 고라니와의 거리 입력
+		int[][] map = new int[N][M];
 		for(int i=0;i<N;i++) {
 			st = new StringTokenizer(br.readLine());
 			
 			for(int j=0;st.hasMoreTokens();j++) {
-				int dist = Integer.valueOf(st.nextToken());
-				int size = map.size();
-
-				while(size-->0) {
-					Pos pos = map.poll();
-					if(dist==Math.abs(pos.x-i)+Math.abs(pos.y-j)) {
-						map.offer(pos);
-					}
-				}
-				
-				if(map.size()==1) {
-					break;
-				}
-			}
-			
-			if(map.size()==1) {
-				break;
+				map[i][j] = Integer.valueOf(st.nextToken());
 			}
 		}
 		
-		// 고라니가 숨어있는 칸의 좌표 출력
-		Pos pos = map.poll();
-		bw.write(String.format("%d %d", pos.x+1, pos.y+1));
+		// 고라니가 있는 r값 계산
+		int r=1, val=map[0][0];
+		
+		for(int i=1;i<N;i++) {
+			if(val>map[i][0]) {
+				r=i+1;
+				val = map[i][0];
+			}
+		}
+		
+		// 고라니가 있는 c값 계산
+		int c=1;
+		val=map[N-1][0];
+		
+		for(int i=1;i<M;i++) {
+			if(val>map[N-1][i]) {
+				c=i+1;
+				val = map[N-1][i];
+			}
+		}
+		
+		// 고라니의 위치 출력
+		bw.write(String.format("%d %d", r, c));
 		
 		bw.close();
 	} // end of main()
 } // end of Main class
-
-class Pos {
-	int x, y;
-	
-	public Pos(int x, int y) {
-		this.x=x;
-		this.y=y;
-	}
-} // end of Pos class
