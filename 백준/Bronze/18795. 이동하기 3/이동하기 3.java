@@ -20,12 +20,12 @@ public class Main {
 		st = new StringTokenizer(br.readLine());
 		long trash=0;
 		
-		for(int i=0;i<N;i++) {
+		while(N-->0) {
 			trash += Long.valueOf(st.nextToken());
 		}
 		
 		st = new StringTokenizer(br.readLine());
-		for(int i=0;i<M;i++) {
+		while(M-->0) {
 			trash += Long.valueOf(st.nextToken());
 		}
 		
