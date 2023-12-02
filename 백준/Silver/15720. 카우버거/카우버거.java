@@ -59,19 +59,9 @@ public class Main {
 		Arrays.sort(side, Collections.reverseOrder());
 		Arrays.sort(drink, Collections.reverseOrder());
 		int cnt= Math.min(Math.min(B, C), D);
-		sum=0;
 		
 		for(int i=0;i<cnt;i++) {
-			sum += (burgur[i]+side[i]+drink[i])*9/10;
-		}
-		for(int i=cnt;i<B;i++) {
-			sum += burgur[i];
-		}
-		for(int i=cnt;i<C;i++) {
-			sum += side[i];
-		}
-		for(int i=cnt;i<D;i++) {
-			sum += drink[i];
+			sum -= (burgur[i]+side[i]+drink[i])/10;
 		}
 		
 		bw.write(Integer.toString(sum));
