@@ -35,19 +35,12 @@ public class Main {
 		
 		// 출발할 수 없는 팀의 최솟값 계산
 		for(int i=0;i<N;i++) {
-			if(i==0) {
-				if(boat[0]==0&&boat[1]==2) {
-					boat[0]++;
-					boat[1]--;
-				}
-			} else {
-				if(boat[i]==0&&boat[i-1]==2) {
-					boat[i]++;
-					boat[i-1]--;
-				} else if(i!=N-1&&boat[i]==0&&boat[i+1]==2) {
-					boat[i]++;
-					boat[i+1]--;
-				}
+			if(i!=0&&boat[i]==0&&boat[i-1]==2) {
+				boat[i]++;
+				boat[i-1]--;
+			} else if(i!=N-1&&boat[i]==0&&boat[i+1]==2) {
+				boat[i]++;
+				boat[i+1]--;
 			}
 		}
 		
