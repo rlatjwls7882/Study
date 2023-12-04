@@ -13,31 +13,14 @@ public class Main {
 		int T = Integer.valueOf(br.readLine());
 		
 		while(T-->0) {
-			String string = br.readLine();
+			String string = br.readLine().replace('T', '0').replace('H', '1');
 			
 			// 3-동전수열이 몇 번 나타났는지 계산
 			int[] arr = new int[8];
 			for(int i=0;i<38;i++) {
-				if(string.substring(i, i+3).equals("TTT")) {
-					arr[0]++;
-				} else if(string.substring(i, i+3).equals("TTH")) {
-					arr[1]++;
-				} else if(string.substring(i, i+3).equals("THT")) {
-					arr[2]++;
-				} else if(string.substring(i, i+3).equals("THH")) {
-					arr[3]++;
-				} else if(string.substring(i, i+3).equals("HTT")) {
-					arr[4]++;
-				} else if(string.substring(i, i+3).equals("HTH")) {
-					arr[5]++;
-				} else if(string.substring(i, i+3).equals("HHT")) {
-					arr[6]++;
-				} else {
-					arr[7]++;
-				}
+				arr[Integer.valueOf(string.substring(i, i+3), 2)]++;
 			}
 			
-			// 출력
 			for(int i=0;i<8;i++) {
 				bw.write(Integer.toString(arr[i]));
 				bw.write(' ');
