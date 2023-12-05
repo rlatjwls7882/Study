@@ -9,52 +9,49 @@ public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	static int N;
-	static int[] price;
+	static long[] price;
 	
 	public static void main(String[] args) throws IOException {
 		
 		N = Integer.valueOf(br.readLine())-1;
 		
 		// 도로와 주유소의 기름의 가격 입력
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int[] road = new int[N];
-		for(int i=0;i<N;i++) {
-			road[i] = Integer.valueOf(st.nextToken());
-		}
+		StringTokenizer st1 = new StringTokenizer(br.readLine());
+		StringTokenizer st2 = new StringTokenizer(br.readLine());
+		long[] road = new long[N];
+		price = new long[N];
 		
-		st = new StringTokenizer(br.readLine());
-		price = new int[N];
 		for(int i=0;i<N;i++) {
-			price[i] = Integer.valueOf(st.nextToken());
+			road[i] = Long.valueOf(st1.nextToken());
+			price[i] = Long.valueOf(st2.nextToken());
 		}
 		
 		// 제일 오른쪽 도시로 가는 최소 비용 계산
-		int cost=0;
-		for(int i=0;i<N;i++) {
-			if(isLowest(i)) {
-				for(int j=i;j<N;j++) {
-					cost += price[i]*road[j];
-				}
-				break;
-			} else {
-				cost += price[i]*road[i];
+		long cost=0;
+		for(int i=0;i<N;) {
+			int pos = getPos(i);
+			
+			for(int j=i;j<=pos;j++) {
+				cost += price[i]*road[j];
 			}
+			i=pos+1;
 		}
 		
-		bw.write(Integer.toString(cost));
+		bw.write(Long.toString(cost));
 		
 		bw.close();
 	} // end of main()
 	
-	static boolean isLowest(int pos) {
-		int val = price[pos];
+	static int getPos(int pos) {
+		long val = price[pos];
 		
 		while(pos<N) {
-			if(val>price[pos++]) {
-				return false;
+			if(val>price[pos]) {
+				return pos-1;
 			}
+			pos++;
 		}
 
-		return true;
-	} // end of isLowest()
+		return N-1;
+	} // end of getPos()
 } // end of Main class
