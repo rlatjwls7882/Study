@@ -99,10 +99,6 @@ class Node implements Comparable<Node> {
 		this.end=end;
 		this.cost=cost;
 	}
-	public Node(int start, int end) {
-		this.start=start;
-		this.end=end;
-	}
 	
 	@Override
 	public int compareTo(Node node) {
