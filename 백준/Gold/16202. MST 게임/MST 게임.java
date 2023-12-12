@@ -54,7 +54,9 @@ public class Main {
 				bw.write(Integer.toString(score));
 				bw.write(' ');
 			} else {
-				bw.write("0 ");
+				while(i++<K) {
+					bw.write("0 ");
+				}
 			}
 		}
 		
