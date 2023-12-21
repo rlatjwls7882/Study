@@ -49,7 +49,7 @@ public class Main {
 			Node node = pq.poll();
 			
 			if(visited[node.end]) {
-				return dist;
+				continue;
 			}
 			visited[node.end]=true;
 			
