@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.HashSet;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -21,20 +20,14 @@ public class Main {
 			int B = Integer.valueOf(st.nextToken());
 			
 			// A와 B의 최소 공통조상 찾기
-			HashSet<Integer> parentList = new HashSet<Integer>();
-			
-			// A의 조상
-			while(A!=0) {
-				parentList.add(A);
-				A/=2;
-			}
-			
-			// B의 조상
-			while(B!=0) {
-				if(!parentList.add(B)) {
+			while(A!=B) {
+				if(A>B) {
+					A/=2;
+				} else if(B>A) {
+					B/=2;
+				} else {
 					break;
 				}
-				B/=2;
 			}
 			
 			// 출력
