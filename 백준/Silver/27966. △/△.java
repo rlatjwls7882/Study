@@ -19,7 +19,8 @@ public class Main {
 		bw.newLine();
 		
 		for(int i=2;i<=N;i++) {
-			bw.write(i+" 1\n");
+			bw.write(Integer.toString(i));
+			bw.write(" 1\n");
 		}
 		
 		bw.close();
