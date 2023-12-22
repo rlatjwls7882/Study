@@ -23,6 +23,7 @@ public class Main {
 		}
 		
 		// 곰곰이가 연속으로 치킨을 먹는 날의 최솟값 계산
+		// = Math.ceil(chicken/(N-chicken+1))
 		bw.write(Integer.toString(N/(N-chicken+1)));
 		
 		bw.close();
