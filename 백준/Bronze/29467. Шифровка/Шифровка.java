@@ -3,8 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Collections;
-import java.util.PriorityQueue;
 
 public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -16,14 +14,17 @@ public class Main {
 		int length = string.length();
 		
 		// 사전순으로 최대 부분 수열 확인
-		PriorityQueue<String> subStrings = new PriorityQueue<>(Collections.reverseOrder());
+		String maxString = "a";
 		for(int i=0;i<length;i++) {
 			for(int j=i+1;j<=length;j++) {
-				subStrings.add(string.substring(i, j));
+				String subString = string.substring(i, j);
+				if(maxString.compareTo(subString)<0) {
+					maxString = subString;
+				}
 			}
 		}
 		
-		bw.write(subStrings.poll());
+		bw.write(maxString);
 		
 		bw.close();
 	} // end of main()
