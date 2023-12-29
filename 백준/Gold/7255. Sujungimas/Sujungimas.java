@@ -3,7 +3,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -40,13 +39,13 @@ public class Main {
 			union(u, v);
 		}
 		
-		// 나머지 철도 건설
-		ArrayList<Integer> pos = new ArrayList<>();
+		// 나머지 철도 건설 비용
+		PriorityQueue<Integer> eachCost = new PriorityQueue<>();
 		int cnt=0;
 		
 		for(int i=0;i<N;i++) {
 			if(parent[i]==i) {
-				pos.add(i);
+				eachCost.add(S[i]);
 				cnt++;
 			}
 		}
@@ -55,26 +54,14 @@ public class Main {
 		if(cnt==1) {
 			bw.write("0");
 		} else {
+			int smallest = eachCost.poll();
+			int totalCost=0;
 			
-			// 건설할 수 있는 경우의 수
-			PriorityQueue<Node> railRoad = new PriorityQueue<>();
-			for(int i=0;i<pos.size();i++) {
-				for(int j=i+1;j<pos.size();j++) {
-					railRoad.add(new Node(pos.get(i), pos.get(j), S[pos.get(i)]*S[pos.get(j)]));
-				}
+			while(!eachCost.isEmpty()) {
+				totalCost += smallest*eachCost.poll();
 			}
 			
-			// 철도 건설
-			int cost=0;
-			while(!railRoad.isEmpty()) {
-				Node cur = railRoad.poll();
-				if(union(cur.start, cur.end)) {
-					cost += cur.cost;
-				}
-			}
-			
-			// 출력
-			bw.write(Integer.toString(cost));
+			bw.write(Integer.toString(totalCost));
 		}
 		
 		bw.close();
