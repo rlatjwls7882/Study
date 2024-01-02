@@ -50,6 +50,7 @@ public class Main {
 			}
 		}
 		
+        // 출력
 		if(N==1) {
 			bw.write(Integer.toString(minCost));
 		} else {
