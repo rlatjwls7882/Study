@@ -8,13 +8,12 @@ import java.util.StringTokenizer;
 public class Main {
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-	static int HH, MM;
 	
 	public static void main(String[] args) throws IOException {
 		
 		StringTokenizer st = new StringTokenizer(br.readLine(), ":");
-		HH = Integer.valueOf(st.nextToken());
-		MM = Integer.valueOf(st.nextToken());
+		int HH = Integer.valueOf(st.nextToken());
+		int MM = Integer.valueOf(st.nextToken());
 		int N = Integer.valueOf(br.readLine());
 		
 		// N번째 소리가 울려퍼지는 시간 계산
