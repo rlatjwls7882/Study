@@ -12,7 +12,6 @@ public class Main {
 		
 		int w = Integer.valueOf(br.readLine());
 		
-		// w를 둘로 나눠 둘다 짝수인지 확인
 		if(w>2&&w%2==0) {
 			bw.write("YES");
 		} else {
