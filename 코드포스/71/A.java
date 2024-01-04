@@ -12,7 +12,6 @@ public class Main {
 		
 		int n = Integer.valueOf(br.readLine());
 		
-		// 10자를 초과하는 단어는 약어로 변경
 		while(n-->0) {
 			String string = br.readLine();
 			if(string.length()<=10) {
