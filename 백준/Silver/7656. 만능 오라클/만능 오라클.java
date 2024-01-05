@@ -17,8 +17,9 @@ public class Main {
 		while(string.indexOf("What is", idx)!=-1) {
 			int start = string.indexOf("What is", idx);
 			int end = string.indexOf("?", start);
+			int nextStart = string.indexOf("What is", start+1);
 			
-			if(string.indexOf("What is", start+1)>end||string.indexOf("What is", start+1)==-1) {
+			if(nextStart>end||nextStart==-1) {
 				bw.write("Forty-two"+string.substring(start+4, end)+".");
 				bw.newLine();
 			}
