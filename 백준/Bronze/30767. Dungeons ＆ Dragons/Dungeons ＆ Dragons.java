@@ -17,24 +17,13 @@ public class Main {
 		long d = Long.valueOf(br.readLine());
 		
 		// n을 만드는 경우의 수 계산
-		n -= a+c;
-		b -= a;
-		d -= c;
+		long minN = n-b;
+		long maxN = n-a;
 		
-		if(0<=n&&n<=b+d) {
-			if(n<=b||n<=d) {
-				bw.write(Long.toString(Math.min(Math.min(b, d), n)+1));
-			} else {
-				a = Math.min(b, n);
-				n -= a;
-				c = Math.min(d, n);
-				n -= c;
-				
-				bw.write(Long.toString(d-c+1));
-			}
-		} else {
-			bw.write("0");
-		}
+		minN = Math.max(minN, c);
+		maxN = Math.min(maxN, d);
+		
+		bw.write(Long.toString(Math.max(0, maxN-minN+1)));
 		
 		bw.close();
 	} // end of main()
