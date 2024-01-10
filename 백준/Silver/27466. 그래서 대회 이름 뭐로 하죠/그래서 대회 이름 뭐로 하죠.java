@@ -26,6 +26,7 @@ public class Main {
 				if(S.charAt(i)!='A'&&S.charAt(i)!='E'&&S.charAt(i)!='I'&&S.charAt(i)!='O'&&S.charAt(i)!='U') {
 					sb.append(S.charAt(i));
 					idx++;
+					break;
 				}
 			} else if(idx==M-2||idx==M-3) {
 				if(S.charAt(i)=='A') {
