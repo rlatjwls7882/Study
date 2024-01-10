@@ -16,34 +16,31 @@ public class Main {
 		int N = Integer.valueOf(st.nextToken());
 		int M = Integer.valueOf(st.nextToken());
 		
-		// 알파벳 종류 확인
+		// 운영진이 좋아하는 이름을 만들 수 있는지 확인
 		String S = br.readLine();
 		
-		int[] chars = new int[26];
-		char consonant = ' ';
+		int idx=0;
+		StringBuilder sb = new StringBuilder();
 		for(int i=0;i<N;i++) {
-			if(consonant==' '&&!(S.charAt(i)=='A'||S.charAt(i)=='E'||S.charAt(i)=='I'||S.charAt(i)=='O'||S.charAt(i)=='U')) {
-				consonant = S.charAt(i);
+			if(idx==M-1) {
+				if(S.charAt(i)!='A'&&S.charAt(i)!='E'&&S.charAt(i)!='I'&&S.charAt(i)!='O'&&S.charAt(i)!='U') {
+					sb.append(S.charAt(i));
+					idx++;
+				}
+			} else if(idx==M-2||idx==M-3) {
+				if(S.charAt(i)=='A') {
+					sb.append('A');
+					idx++;
+				}
 			} else {
-				chars[S.charAt(i)-'A']++;
+				sb.append(S.charAt(i));
+				idx++;
 			}
 		}
 		
-		// 운영진이 좋아하는 이름을 만들 수 있는지 확인
-		if(chars[0]>=2&&consonant!=' '&&M>=3) {
+		if(idx==M) {
 			bw.write("YES\n");
-			chars[0]-=2;
-			
-			int idx=0;
-			for(int i=3;i<M;i++) {
-				while(chars[idx]==0) {
-					idx++;
-				}
-				bw.write(idx+'A');
-				chars[idx]--;
-			}
-			bw.write("AA"+consonant);
-			
+			bw.write(sb.toString());
 		} else {
 			bw.write("NO");
 		}
