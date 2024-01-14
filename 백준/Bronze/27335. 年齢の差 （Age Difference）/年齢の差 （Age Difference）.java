@@ -12,17 +12,19 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		
 		int N = Integer.valueOf(br.readLine());
+		
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int[] A = new int[N];
+		int max=0, min=Integer.MAX_VALUE;
+		
 		for(int i=0;i<N;i++) {
 			A[i] = Integer.valueOf(st.nextToken());
+			max = Math.max(max, A[i]);
+			min = Math.min(min, A[i]);
 		}
 		
 		for(int i=0;i<N;i++) {
-			int diff=0;
-			for(int j=0;j<N;j++) {
-				diff = Math.max(diff, Math.abs(A[i]-A[j]));
-			}
+			int diff = Math.max(max-A[i], A[i]-min);
 			bw.write(diff+"\n");
 		}
 		
