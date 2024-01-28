@@ -13,22 +13,21 @@ public class Main {
 		int n = Integer.valueOf(br.readLine());
 		
 		int[] arr = new int[n];
-		double sum=0;
+		int sum=0;
 		for(int i=0;i<n;i++) {
 			arr[i] = Integer.valueOf(br.readLine());
 			sum += arr[i];
 		}
-		sum/=2;
 		
 		boolean chk=false;
 		for(int i=0;i<n;i++) {
-			if(arr[i]==sum) {
+			if(arr[i]*2==sum) {
 				chk=true;
 			}
 		}
 		
 		if(chk) {
-			bw.write(Integer.toString((int)sum));
+			bw.write(Integer.toString(sum/2));
 		} else {
 			bw.write("BAD");
 		}
