@@ -18,14 +18,10 @@ public class Main {
 			int b = Integer.valueOf(st.nextToken());
 			int n = Integer.valueOf(st.nextToken());
 			
-			String string = Integer.toString(n, b);
 			int sum=0;
-			for(int i=0;i<string.length();i++) {
-				if(string.charAt(i)>='a') {
-					sum += Math.pow(string.charAt(i)-87, 2);
-				} else {
-					sum += Math.pow(string.charAt(i)-'0', 2);
-				}
+			while(n!=0) {
+				sum += Math.pow(n%b, 2);
+				n/=b;
 			}
 			bw.write(K+" "+sum+"\n");
 		}
