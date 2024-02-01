@@ -15,8 +15,7 @@ public class Main {
 		
 		int[] birth = new int[13];
 		while(N-->0) {
-			StringTokenizer st = new StringTokenizer(br.readLine(), " /");
-			st.nextToken();
+			StringTokenizer st = new StringTokenizer(br.readLine(), "/");
 			st.nextToken();
 			birth[Integer.valueOf(st.nextToken())]++;
 		}
