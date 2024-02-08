@@ -15,7 +15,7 @@ public class Main {
 		
 		int T = Integer.valueOf(br.readLine());
 		for(int i=1;i<=T;i++) {
-			int K = Integer.valueOf(br.readLine());
+			int K = Integer.valueOf(br.readLine())-1;
 			
 			while(length<K) {
 				sb.append('0');
@@ -28,7 +28,7 @@ public class Main {
 				}
 				length = length*2+1;
 			}
-			bw.write("Case #"+i+": "+sb.charAt(K-1)+"\n");
+			bw.write("Case #"+i+": "+sb.charAt(K)+"\n");
 		}
 		
 		bw.close();
