@@ -13,7 +13,7 @@ public class BoardController {
 	@GetMapping("/list")
 	public String list(HttpServletRequest request) {
 		if(!loginCheck(request)) {
-			return "redirect:/login/login?toURL="+request.getRequestURL(); // �α����� �������� �α��� ȭ������ �̵�
+			return "redirect:/login/login?toURL="+request.getRequestURL();  // 로그인을 안했으면 로그인 화면으로 이동
 		}
 		
 		// 로그인을 한 상태이면, 게시판 화면으로 이동

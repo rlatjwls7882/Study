@@ -23,9 +23,9 @@ public class LoginController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		// 1. ������ ����
+		// 1. 세션을 종료
 		session.invalidate();
-		// 2. Ȩ���� �̵�
+		// 2. 홈으로 이동
 		return "redirect:/";
 	}
 	
@@ -41,10 +41,10 @@ public class LoginController {
 		
 		// 2-2. id와 pwd가 일치하면,
 		
-		// ���� ��ü�� ������
+		//  세션 객체를 얻어오기
 		HttpSession session = request.getSession();
 		
-		// ���� ��ü�� id�� ����
+		//  세션 객체에 id를 저장
 		session.setAttribute("id", id);
 		
 		if(rememberId) {
@@ -55,7 +55,7 @@ public class LoginController {
 		} else {
 			// 1. 쿠키를 삭제
 			Cookie cookie = new Cookie("id", id);
-			cookie.setMaxAge(0); // ��Ű�� ����
+			cookie.setMaxAge(0); // 쿠키를 삭제
 			// 2. 응답에 저장
 			response.addCookie(cookie);
 		}

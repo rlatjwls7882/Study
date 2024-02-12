@@ -27,8 +27,8 @@ public class RegisterController {
 //		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 //		binder.registerCustomEditor(Date.class, new CustomDateEditor(df, false));
 		binder.registerCustomEditor(String[].class, "hobby", new StringArrayPropertyEditor("#"));
-//		binder.setValidator(new UserValidator()); // UserValidator�� WebDataBinder�� ���� validator�� ���
-//		binder.addValidators(new UserValidator()); // UserValidator�� WebDataBinder�� ���� validator�� ���
+//		binder.setValidator(new UserValidator()); // UserValidator   WebDataBinder        validator      
+//		binder.addValidators(new UserValidator()); // UserValidator   WebDataBinder        validator      
 		
 		List<Validator> validatorList = binder.getValidators();
 		System.out.println("validatorList="+validatorList);
@@ -40,29 +40,29 @@ public class RegisterController {
 	}
 	
 //	@RequestMapping(value="/register/save", method=RequestMethod.POST)
-	@PostMapping("/save") // 4.3����
+	@PostMapping("/save")  // 4.3부터 
 	public String save(@Valid User user, BindingResult result, Model m) throws IOException {
 		System.out.println("result="+result);
 		System.out.println("user"+user);
 		
-		// ���� ���� - Validator�� ���� �����ϰ�, validate()�� ���� ȣ��
+		//           - Validator             ϰ , validate()        ȣ  
 //		UserValidator userValidator = new UserValidator();
-//		userValidator.validate(user, result); // BindingResult�� Errors�� �ڼ�
+//		userValidator.validate(user, result); // BindingResult   Errors    ڼ 
 //		
-		// User��ü�� ������ ��� ������ ������, registerForm�� �̿��ؼ� ������ ���������.
+		// User  ü                           , registerForm    ̿  ؼ                  .
 		if(result.hasErrors()) {
 			return "registerForm";
 		}
 		
-//		// 1. ��ȿ�� �˻�
+//		// 1.   ȿ    ˻ 
 //		if(!isValid(user)) {
-//			String msg = URLEncoder.encode("id�� �߸��Է��ϼ̽��ϴ�.", "utf-8");
+//			String msg = URLEncoder.encode("id를 잘못입력하셨습니다.", "utf-8");
 //			m.addAttribute("msg", msg);
 //			return "forward:/register/add";
-////			return "redirect:/register/add?msg="+msg; // URL ���ۼ�(rewriting)
+////			return "redirect:/register/add?msg="+msg; // URL재작성(rewriting)
 //		}
 		
-		// 2. DB�� �ű�ȸ�� ������ ����
+		// 2. DB에 신규회원 정보를 저장 
 		return "registerInfo";
 	}
 
