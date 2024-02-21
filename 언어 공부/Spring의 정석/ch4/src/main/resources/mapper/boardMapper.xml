@@ -5,25 +5,37 @@
 <mapper namespace="com.fastcampus.ch4.dao.BoardMapper">
     <select id="select" parameterType="int" resultType="BoardDto">
         SELECT bno, title, content, writer
-               ,  view_cnt,  comment_cnt,  reg_date
+            , view_cnt, comment_cnt, reg_date
         FROM board
-        WHERE bno=#{bno}
+        WHERE bno = #{bno}
     </select>
 
     <select id="count" resultType="int">
         SELECT count(*) FROM board
     </select>
 
-    <delete id="delete" parameterType="map">
-        DELETE FROM board WHERE bno = #{bno} and writer = #{writer}
-    </delete>
-
     <insert id="insert" parameterType="BoardDto">
         INSERT INTO board
-        (title, content, writer)
+            (title, content, writer)
         VALUES
             (#{title}, #{content}, #{writer})
     </insert>
+
+    <update id="update" parameterType="BoardDto">
+        UPDATE board
+        SET   title = #{title}
+          , content = #{content}
+          , up_date = now()
+        WHERE bno = #{bno}
+    </update>
+
+    <delete id="deleteForAdmin">
+        DELETE FROM board WHERE bno = #{bno}
+    </delete>
+
+    <delete id="delete" parameterType="map">
+        DELETE FROM board WHERE bno = #{bno} and writer = #{writer}
+    </delete>
 
     <select id="selectAll" resultType="BoardDto">
         SELECT bno, title, content, writer, view_cnt, comment_cnt, reg_date
@@ -31,34 +43,20 @@
         ORDER BY reg_date DESC, bno DESC
     </select>
 
-    <sql id="selectFromBoard">
-        SELECT bno, title, content, writer, view_cnt, comment_cnt, reg_date
-        FROM board;
-    </sql>
-
     <select id="selectPage" parameterType="map" resultType="BoardDto">
-        <include refid="selectFromBoard"/>
+        SELECT bno, title, content, writer, view_cnt, comment_cnt, reg_date
+        FROM board
         ORDER BY reg_date DESC, bno DESC
         LIMIT #{offset}, #{pageSize}
     </select>
 
-    <update id="update" parameterType="BoardDto">
-        UPDATE board
-        SET title = #{title}
-        , content = #{content}
-        , up_date = now()
-        WHERE bno = #{bno}
-    </update>
-
-    <update id="updateCommentCnt" parameterType="map">
-        UPDATE board
-        SET comment_cnt = comment_cnt+#{cnt}
-        WHERE bno = #{bno}
-    </update>
-
     <update id="increaseViewCnt" parameterType="int">
         UPDATE board
-        SET view_cnt = view_cnt+1
+        SET   view_cnt = view_cnt + 1
         WHERE bno = #{bno}
     </update>
+
+    <delete id="deleteAll">
+        DELETE FROM board
+    </delete>
 </mapper>
