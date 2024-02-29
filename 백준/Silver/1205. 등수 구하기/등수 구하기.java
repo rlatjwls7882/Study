@@ -13,24 +13,20 @@ public class Main {
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int N = Integer.valueOf(st.nextToken());
-		int score = Integer.valueOf(st.nextToken());
+		int TaeWooScore = Integer.valueOf(st.nextToken());
 		int P = Integer.valueOf(st.nextToken());
 		
 		if(N==0) {
 			bw.write("1");
 		} else {
-			int[] scores = new int[N];
 			st = new StringTokenizer(br.readLine());
-			for(int i=0;i<N;i++) {
-				scores[i] = Integer.valueOf(st.nextToken());
-			}
-			
 			int idx=1, pos=1;
 			for(int i=0;i<N;i++) {
-				if(scores[i]<score) {
+				int score = Integer.valueOf(st.nextToken());
+				if(score<TaeWooScore) {
 					break;
 				}
-				if(scores[i]>score) {
+				if(score>TaeWooScore) {
 					idx=i+2;
 				}
 				pos++;
