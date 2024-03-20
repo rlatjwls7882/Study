@@ -10,37 +10,27 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        // 아홉 난쟁이의 키 입력
-        int[] h = new int[9];
-        
-        for(int i=0;i<9;i++)
-        	h[i] = Integer.valueOf(br.readLine());
-        
-        Arrays.sort(h);
-        
-        // 아홉 난쟁이의 키의 합 계산
         int sum=0;
+        int[] key = new int[9];
+        for(int i=0;i<9;i++) {
+        	key[i] = Integer.valueOf(br.readLine());
+        	sum += key[i];
+        }
+        Arrays.sort(key);
         
-        for(int i=0;i<9;i++)
-        	sum += h[i];
-        
-        // 일곱 난쟁이에 포함되지 않는 난쟁이 계산
-        boolean end = false;
-        int except1=0, except2=0;
-        
-        for(int i=0;i<9&&!end;i++)
-        	for(int j=i+1;j<9;j++)
-        		if(sum-h[i]-h[j]==100) {
-        			except1=i;
-        			except2=j;
-        			end=true;
+        for(int i=0;i<9;i++) {
+        	for(int j=i+1;j<9;j++) {
+        		if(sum-key[i]-key[j]==100) {
+        			for(int k=0;k<9;k++) {
+        				if(k!=i&&k!=j) {
+        					bw.write(key[k]+"\n");
+        				}
+        			}
+        			i=j=10;
         			break;
         		}
-        
-        // 일곱 난쟁이의 키 출력
-        for(int i=0;i<9;i++)
-        	if(i!=except1&&i!=except2)
-        		bw.write(h[i]+"\n");
+        	}
+        }
         
         bw.close();
     } // end of main
