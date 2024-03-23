@@ -20,17 +20,17 @@ public class Main {
     		}
     		
     		String string = st.nextToken();
-    		HashSet<Character> set = new HashSet<>();
+    		HashSet<Character> tanned = new HashSet<>();
     		HashSet<Character> leave = new HashSet<>();
     		for(int i=0;i<string.length();i++) {
     			char c = string.charAt(i);
-    			if(set.contains(c)) {
-    				set.remove(c);
+    			if(tanned.contains(c)) {
+    				tanned.remove(c);
     			} else {
-					if(n==set.size()) {
+					if(n==tanned.size()) {
 						leave.add(c);
 					} else {
-						set.add(c);
+						tanned.add(c);
 					}
 				}
     		}
