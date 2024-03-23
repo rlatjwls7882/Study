@@ -6,6 +6,7 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 
@@ -20,7 +21,7 @@ public class Main {
     	int M = Integer.valueOf(st.nextToken());
     	int K = Integer.valueOf(st.nextToken());
     	
-    	TreeMap<String, Integer> subjects = new TreeMap<>();
+    	HashMap<String, Integer> subjects = new HashMap<>();
     	for(int i=0;i<N;i++) {
     		st = new StringTokenizer(br.readLine());
     		subjects.put(st.nextToken(), Integer.valueOf(st.nextToken()));
