@@ -54,7 +54,7 @@ class Meeting implements Comparable<Meeting> {
 		if(this.end!=o.end) {
 			return this.end-o.end;
 		} else {
-			return this.start-o.end;
+			return this.start-o.start;
 		}
 	}
 } // end of Meeting class
