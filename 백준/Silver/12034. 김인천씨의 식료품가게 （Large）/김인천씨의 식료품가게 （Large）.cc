@@ -8,24 +8,18 @@ int main(void) {
     
     for(int i=1;i<=T;i++) {
         int N; cin >> N;
-        priority_queue<int, vector<int>, greater<int>> pq;
+        vector<int> check;
         for(int i=0;i<2*N;i++) {
             int P; cin >> P;
-            pq.push(P);
+            check.push_back(P);
         }
 
         cout << "Case #" << i << ": ";
-        vector<int> check;
-        while(N>0) {
-            int cur = pq.top(); pq.pop();
-            if(find(check.begin(), check.end(), cur)==check.end()) {
-                int next = cur/3*4;
-                check.push_back(next);
-                N--;
-                cout << cur << " ";
-            } else {
-                check.erase(find(check.begin(), check.end(), cur));
-            }
+        while(!check.empty()) {
+            int cur = check.front(); check.erase(check.begin());
+            int next = cur/3*4;
+            cout << cur << " ";
+            check.erase(find(check.begin(), check.end(), next));
         }
         cout << endl;
     }
