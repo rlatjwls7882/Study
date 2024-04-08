@@ -13,6 +13,8 @@ int main(void) {
         if(ch1>s[i]) {
             ch1 = s[i];
             ch2 = 'z';
+        }
+        if(ch1==s[i]) {
             if(i-1>=0) {
                 ch2 = min(ch2, s[i-1]);
             }
