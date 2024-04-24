@@ -14,7 +14,7 @@ int main(void) {
 
         int pile2=0;
         for(int i=n/2;i<n;i++) {
-            pile2 += pow(i, 2);
+            pile2 += pow(2, i);
         }
         printf("%d\n", pile1-pile2);
     }
