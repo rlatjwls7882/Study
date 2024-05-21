@@ -3,9 +3,7 @@ using namespace std;
 typedef pair<int, string> P;
 
 bool comp(P a, P b) {
-    // if(a.second.length()==b.second.length())
     return a.second<b.second;
-    // return a.second.length()<b.second.length();
 }
 
 int main() {
