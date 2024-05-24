@@ -20,16 +20,10 @@ int main(void) {
         if(!bin[i]) size=i;
         else break;
     }
+    ll cnt=pow((ll)2, size)-1;
 
-    ll sum=0;
-    for(int i=0;i<size;i++) {
-        if(!bin[i]) {
-            sum += pow((ll)2, i);
-        }
-    }
-
-    if(sum!=0) {
-        cout << "2\n" << min(sum, N) << '\n' << max(sum, N);
+    if(cnt!=N) {
+        cout << "2\n" << (N^cnt) << '\n' << N;
     } else {
         cout << "1" << '\n' << N;
     }

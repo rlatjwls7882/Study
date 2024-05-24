@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 5월 24일 12:33:34
+2024년 5월 24일 12:38:28
 
 ### 문제 설명
 
@@ -20,7 +20,7 @@
 
 <p>주환이는 오늘이 자신과 가장 친한 아기 블롭의 생일이라는 사실을 알고, 선물로 <mjx-container class="MathJax" jax="CHTML" style="font-size: 108.2%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>K</mi></math></mjx-assistive-mml><span aria-hidden="true" class="no-mathjax mjx-copytext">$K$</span></mjx-container>장의 카드를 주었다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 768px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/bc81653f-f48e-4354-b293-76cc7c9c8ee3/-/preview/" style="width: 768px;"></p>
 
 <p>주환이는 카드를 다음 조건에 맞게 뽑았다.</p>
 
