@@ -3,16 +3,11 @@ using namespace std;
 
 int main(void) {
     int n; cin >> n;
-    int arr[n];
+    int sum=0, last=0;
     for(int i=0;i<n;i++) {
-        cin >> arr[i];
-    }
-    sort(arr, arr+n);
-
-    int sum=0, mul=arr[0];
-    for(int i=1;i<n;i++) {
-        sum += mul*arr[i];
-        mul+=arr[i];
+        int tmp; cin >> tmp;
+        sum += last*tmp;
+        last+=tmp;
     }
     cout << sum;
 }
