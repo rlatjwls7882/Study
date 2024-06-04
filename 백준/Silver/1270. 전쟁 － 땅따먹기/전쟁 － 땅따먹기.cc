@@ -6,20 +6,25 @@ int main(void) {
     int n; cin >> n;
     while(n-->0) {
         int T; cin >> T;
-        map<long long, int> m;
+        long long arr[T];
         for(int i=0;i<T;i++) {
-            long long cnt; cin >> cnt;
-            m[cnt]++;
+            cin >> arr[i];
         }
         
-        bool chk=false;
-        for(auto p:m) {
-            if(p.second>T/2) {
-                cout << p.first << '\n';
-                chk=true;
-                break;
-            }
+        int cnt=0;
+        long long major=0;
+        for(int i=0;i<T;i++) {
+            if(cnt==0) major=arr[i];
+            if(major==arr[i]) cnt++;
+            else cnt--;
         }
-        if(!chk) cout << "SYJKGW\n";
+
+        cnt=0;
+        for(int i=0;i<T;i++) {
+            if(major==arr[i]) cnt++;
+        }
+
+        if(cnt>T/2) cout << major << '\n';
+        else cout << "SYJKGW\n";
     }
 }
