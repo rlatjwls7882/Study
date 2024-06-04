@@ -9,10 +9,9 @@ int main(void) {
         cout << 0;
         return 0;
     }
-    for(int i=2;i<100000;i++) {
+    for(int i=2;i*i<=N;i++) {
         if(N%i==0) {
-            if(N==i) cout << N-1;
-            else cout << N-N/i;
+            cout << N-N/i;
             return 0;
         }
     }
