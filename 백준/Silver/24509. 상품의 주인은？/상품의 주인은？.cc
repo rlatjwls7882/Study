@@ -12,26 +12,6 @@ struct stu {
     }
 };
 
-bool comp1(stu a, stu b) {
-    if(a.A==b.A) return a.X>b.X;
-    return a.A<b.A;
-}
-
-bool comp2(stu a, stu b) {
-    if(a.B==b.B) return a.X>b.X;
-    return a.B<b.B;
-}
-
-bool comp3(stu a, stu b) {
-    if(a.C==b.C) return a.X>b.X;
-    return a.C<b.C;
-}
-
-bool comp4(stu a, stu b) {
-    if(a.D==b.D) return a.X>b.X;
-    return a.D<b.D;
-}
-
 int main(void) {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     int N; cin >> N;
@@ -42,18 +22,18 @@ int main(void) {
         v.push_back(stu(X, A, B, C, D));
     }
     
-    sort(v.begin(), v.end(), comp1);
+    sort(v.begin(), v.end(), [](stu a, stu b) {return a.A==b.A ? a.X>b.X : a.A<b.A;});
     cout << v.back().X << ' ';
     v.pop_back();
 
-    sort(v.begin(), v.end(), comp2);
+    sort(v.begin(), v.end(), [](stu a, stu b) {return a.B==b.B ? a.X>b.X : a.B<b.B;});
     cout << v.back().X << ' ';
     v.pop_back();
 
-    sort(v.begin(), v.end(), comp3);
+    sort(v.begin(), v.end(), [](stu a, stu b) {return a.C==b.C ? a.X>b.X : a.C<b.C;});
     cout << v.back().X << ' ';
     v.pop_back();
 
-    sort(v.begin(), v.end(), comp4);
+    sort(v.begin(), v.end(), [](stu a, stu b) {return a.D==b.D ? a.X>b.X : a.D<b.D;});
     cout << v.back().X;
 }
