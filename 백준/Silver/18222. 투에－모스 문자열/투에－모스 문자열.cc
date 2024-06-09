@@ -1,7 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
 void chk(long long _size, long long k, bool reversed) {
     if(_size==1) {
         if(reversed) cout << 1;
