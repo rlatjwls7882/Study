@@ -11,16 +11,14 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		
 		int N = Integer.valueOf(br.readLine());
-		long[] dp = {0, 0, 0};
-        
-		if(N>=2) {
-			dp = new long[] {0, 1, 1};
+		
+		long[] dp = new long[N+1];
+		dp[1]=2;
+		for(int i=2;i<N;i++) {
+			dp[i] = dp[i-1]*3%MOD;
 		}
-		for(int i=0;i<N-2;i++) {
-			long tmp = (dp[0]+dp[1]+dp[2])%MOD;
-			dp = new long[] {tmp, tmp, tmp};
-		}
-		bw.write(Long.toString((dp[0]+dp[1]+dp[2])%MOD));
+		
+		bw.write(Long.toString(dp[N-1]%MOD));
 		
 		bw.close();
 	} // end of main
