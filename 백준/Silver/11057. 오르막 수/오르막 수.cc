@@ -6,12 +6,12 @@ int main(void) {
     int N; cin >> N;
 
     int dp[10] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    
+
     while(N-->1) {
         int nextDp[10] = {0, };
         for(int i=0;i<10;i++) {
             if(dp[i]) {
-                for(int j=i;j<10;j++) {
+                for(int j=0;j<=i;j++) {
                     nextDp[j]=(nextDp[j]+dp[i])%10007;
                 }
             }
