@@ -10,13 +10,7 @@ int main(void) {
     }
 
     int k; cin >> k;
-    int cnt=0;
-    while(k<N) {
-        k*=2;
-        cnt++;
-    }
-    k = pow(2, cnt);
-    
+    k = N/k;
     for(int i=0;i<N;i+=k) {
         sort(arr+i, arr+i+k);
     }
