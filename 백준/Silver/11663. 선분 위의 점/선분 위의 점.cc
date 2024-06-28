@@ -36,8 +36,8 @@ int main(void) {
             }
         }
         int ePos = first;
-
-        if(e<pos[sPos] || s>pos[ePos] || pos[sPos]<s && e<pos[ePos]) {
+        
+        if(e<pos[sPos] || s>pos[ePos]) {
             cout << "0\n";
         } else {
             cout << ePos-sPos+1 << '\n';
