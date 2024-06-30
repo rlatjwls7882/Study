@@ -17,7 +17,7 @@ int main(void) {
     int q; cin >> q;
 
     while(q-->0) {
-        int c, l, r; cin >> c >> l >> r;
+        ll c, l, r; cin >> c >> l >> r;
         if(c==1) {
             cout << a*(r-l+1)+((r-1)*r/2-(l-2)*(l-1)/2)*d << '\n';
         } else {
