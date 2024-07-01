@@ -14,6 +14,8 @@ int gcd(int a, int b) {
 }
 
 int sum(int left, int right) {
+    if(left==right) return arr[left];
+
     int leftLen = (right-left+1)/2;
     int rightLen = right-left+1-leftLen;
 
@@ -27,10 +29,9 @@ int sum(int left, int right) {
         rightGcd = gcd(rightGcd, arr[right-i]);
     }
 
-    if(left!=right) {
-        leftGcd += sum(left+leftLen, right);
-        rightGcd += sum(left, right-rightLen);
-    }
+    leftGcd += sum(left+leftLen, right);
+    rightGcd += sum(left, right-rightLen);
+    
     return max(leftGcd, rightGcd);
 }
 
