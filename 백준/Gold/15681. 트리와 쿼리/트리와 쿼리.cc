@@ -2,14 +2,12 @@
 using namespace std;
 
 vector<vector<int>> connect = vector<vector<int>>(100001);
-bool visited[100001] = {false, };
 int cnt[100001] = {0, };
 
 int dfs(int cur) {
-    visited[cur]=true;
     cnt[cur]++;
     for(int next:connect[cur]) {
-        if(!visited[next]) {
+        if(!cnt[next]) {
             cnt[cur] += dfs(next);
         }
     }
@@ -26,7 +24,7 @@ int main() {
     }
 
     dfs(R);
-    
+
     while(Q-->0) {
         int u; cin >> u;
         cout << cnt[u] << '\n';
