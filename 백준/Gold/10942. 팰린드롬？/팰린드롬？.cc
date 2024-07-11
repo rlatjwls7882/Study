@@ -12,13 +12,11 @@ int main() {
 
     for(int i=0;i<N;i++) {
         isPalindrome[i][i]=true;
+        if(i+1<N) isPalindrome[i+1][i]=true;
     }
 
     for(int i=N-2;i>=0;i--) {
-        if(arr[i]==arr[i+1]) {
-            isPalindrome[i][i+1]=true;
-        }
-        for(int j=i+2;j<N;j++) {
+        for(int j=i+1;j<N;j++) {
             if(arr[i]==arr[j] && isPalindrome[i+1][j-1]) {
                 isPalindrome[i][j]=true;
             }
