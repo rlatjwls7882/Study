@@ -28,10 +28,10 @@ int main() {
                 } else {
                     chk[A[i]]=1;
                 }
-            }
-            if(cnt>2) {
-                res = "NO\n";
-                break;
+                if(cnt>2) {
+                    res = "NO\n";
+                    break;
+                }
             }
         }
         cout << res;
