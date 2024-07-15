@@ -7,10 +7,9 @@ int main() {
 
     int cnt=0;
     if(L.length()==R.length()) {
-        bool alwaysSmall=false;
         for(int i=0;i<L.length();i++) {
-            if(!alwaysSmall && L[i]=='8' && R[i]=='8') cnt++;
-            else if(L[i]!=R[i] && L[i]<R[i]) alwaysSmall=true;
+            if(L[i]=='8' && R[i]=='8') cnt++;
+            else if(L[i]<R[i]) break;
         }
     }
     cout << cnt;
