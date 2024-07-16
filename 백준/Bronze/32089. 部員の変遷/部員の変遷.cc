@@ -23,6 +23,5 @@ int main() {
             }
             cout << maxCnt << '\n';
         }
-
     }
 }
