@@ -11,13 +11,13 @@ int moveY[4] = {-1, 0, 1, 0};
 
 void flood_fill(int x, int y) {
     queue<pair<int, int>> q; q.push(make_pair(x, y));
+    visited[x][y]=cnt;
     while(!q.empty()) {
         pair<int, int> cur = q.front(); q.pop();
-        visited[cur.first][cur.second]=cnt;
         roomSize[cnt]++;
         for(int i=0;i<4;i++) {
             if(!(m[cur.first][cur.second]&bit[i]) && !visited[cur.first+moveX[i]][cur.second+moveY[i]]) {
-                visited[cur.first+moveX[i]][cur.second+moveY[i]]=true;
+                visited[cur.first+moveX[i]][cur.second+moveY[i]]=cnt;
                 q.push(make_pair(cur.first+moveX[i], cur.second+moveY[i]));
             }
         }
