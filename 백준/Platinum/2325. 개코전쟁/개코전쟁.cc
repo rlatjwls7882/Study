@@ -38,15 +38,15 @@ void construct() {
 
 int dijkstra(int prohibit) {
     priority_queue<Edge> pq; pq.push(Edge(1, 0, -1, -1));
-    bool visitinged[N+1] = {false, };
+    bool visited[N+1] = {false, };
     while(!pq.empty()) {
         Edge cur = pq.top(); pq.pop();
-        if(visitinged[cur.v]) continue;
-        visitinged[cur.v]=true;
+        if(visited[cur.v]) continue;
+        visited[cur.v]=true;
         if(cur.v==N) return cur.t;
 
         for(Edge next:connect[cur.v]) {
-            if(!visitinged[next.v] && next.edgeNum!=prohibit) {
+            if(!visited[next.v] && next.edgeNum!=prohibit) {
                 pq.push(Edge(next.v, cur.t+next.t, -1, -1));
             }
         }
