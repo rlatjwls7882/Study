@@ -5,18 +5,22 @@ int N, M, cnt=0;
 int m[50][50];
 int roomSize[2501];
 int visited[50][50] = {0, };
+int bit[4] = {1, 2, 4, 8};
+int moveX[4] = {0, -1, 0, 1};
+int moveY[4] = {-1, 0, 1, 0};
 
 void flood_fill(int x, int y) {
     queue<pair<int, int>> q; q.push(make_pair(x, y));
     while(!q.empty()) {
         pair<int, int> cur = q.front(); q.pop();
-        if(visited[cur.first][cur.second]) continue;
         visited[cur.first][cur.second]=cnt;
         roomSize[cnt]++;
-        if(!(m[cur.first][cur.second]&1) && !visited[cur.first][cur.second-1]) q.push(make_pair(cur.first, cur.second-1));
-        if(!(m[cur.first][cur.second]&2) && !visited[cur.first-1][cur.second]) q.push(make_pair(cur.first-1, cur.second));
-        if(!(m[cur.first][cur.second]&4) && !visited[cur.first][cur.second+1]) q.push(make_pair(cur.first, cur.second+1));
-        if(!(m[cur.first][cur.second]&8) && !visited[cur.first+1][cur.second]) q.push(make_pair(cur.first+1, cur.second));
+        for(int i=0;i<4;i++) {
+            if(!(m[cur.first][cur.second]&bit[i]) && !visited[cur.first+moveX[i]][cur.second+moveY[i]]) {
+                visited[cur.first+moveX[i]][cur.second+moveY[i]]=true;
+                q.push(make_pair(cur.first+moveX[i], cur.second+moveY[i]));
+            }
+        }
     }
 }
 
@@ -43,10 +47,10 @@ int main() {
 
     for(int i=0;i<M;i++) {
         for(int j=0;j<N;j++) {
-            if(m[i][j]&1 && j-1>=0 && visited[i][j]!=visited[i][j-1]) maxSize = max(maxSize, roomSize[visited[i][j]]+roomSize[visited[i][j-1]]);
-            if(m[i][j]&2 && i-1>=0 && visited[i][j]!=visited[i-1][j]) maxSize = max(maxSize, roomSize[visited[i][j]]+roomSize[visited[i-1][j]]);
-            if(m[i][j]&4 && j+1<N && visited[i][j]!=visited[i][j+1]) maxSize = max(maxSize, roomSize[visited[i][j]]+roomSize[visited[i][j+1]]);
-            if(m[i][j]&8 && i+1<M && visited[i][j]!=visited[i+1][j]) maxSize = max(maxSize, roomSize[visited[i][j]]+roomSize[visited[i+1][j]]);
+            for(int k=0;k<4;k++) {
+                if(i+moveX[k]<0 || i+moveX[k]>=M || j+moveY[k]<0 || j+moveY[k]>=N || visited[i][j]==visited[i+moveX[k]][j+moveY[k]]) continue;
+                maxSize = max(maxSize, roomSize[visited[i][j]]+roomSize[visited[i+moveX[k]][j+moveY[k]]]);
+            }
         }
     }
     cout << maxSize;
