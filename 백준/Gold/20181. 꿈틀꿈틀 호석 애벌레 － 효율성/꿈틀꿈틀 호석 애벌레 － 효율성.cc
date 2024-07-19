@@ -9,28 +9,17 @@ int main() {
         cin >> arr[i];
     }
 
-    int select[N][2];
-    int cnt=0, sum=0;
+    long long dp[N] = {0, }, cnt=0, sum=0;
     for(int i=0;i<N;i++) {
+        if(i>=1) dp[i]=dp[i-1];
         sum += arr[i];
         cnt++;
-        if(sum>=K) {
-            select[i][0]=sum-K;
-            select[i][1]=cnt;
-            while(sum>=K) {
-                sum -= arr[i+1-cnt--];
-            }
-        } else {
-            select[i][0]=select[i][1]=0;
-        }
-    }
 
-    long long maxEnergy=select[0][0];
-    long long dp[N]; dp[0]=select[0][0];
-    for(int i=1;i<N;i++) {
-        dp[i]=dp[i-1];
-        if(i-select[i][1]>=0) dp[i] = max(dp[i], dp[i-select[i][1]]+select[i][0]);
-        maxEnergy = max(maxEnergy, dp[i]);
+        if(sum>=K) {
+            if(i-cnt>=0) dp[i] = max(dp[i], dp[i-cnt]+sum-K);
+            else dp[i] = max(dp[i], sum-K);
+        }
+        while(sum>=K) sum -= arr[i+1-cnt--];
     }
-    cout << maxEnergy;
+    cout << dp[N-1];
 }
