@@ -25,8 +25,8 @@ int main() {
         }
     }
 
-    int maxEnergy=select[0][0];
-    int dp[N]; dp[0]=select[0][0];
+    long long maxEnergy=select[0][0];
+    long long dp[N]; dp[0]=select[0][0];
     for(int i=1;i<N;i++) {
         dp[i]=dp[i-1];
         if(i-select[i][1]>=0) dp[i] = max(dp[i], dp[i-select[i][1]]+select[i][0]);
