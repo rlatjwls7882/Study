@@ -4,55 +4,22 @@ using namespace std;
 int main() {
     ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     long long L; int N, K; cin >> L >> N >> K;
-    long long A[N];
+
+    queue<pair<long long, int>> q; 
     for(int i=0;i<N;i++) {
-        cin >> A[i];
+        long long A; cin >> A;
+        q.push(make_pair(A, 0));
     }
 
-    while(K>0) {
-        for(int i=0;K>0;i++) {
-            if(N==1) {
-                if(i==0) {
-                    cout << "0\n";
-                    K--;
-                } else {
-                    if(A[0]-i>=0) {
-                        cout << i << '\n';
-                        K--;
-                    }
-                    if(K>0 && A[0]+i<=L) {
-                        cout << i << '\n';
-                        K--;
-                    }
-                }
-            } else {
-                for(int j=0;j<N && K>0;j++) {
-                    if(i==0) {
-                        cout << "0\n";
-                        K--;
-                    } else if(j==0) {
-                        if(A[j]-i>=0) {
-                            cout << i << '\n';
-                            K--;
-                        }
-                    } else {
-                        if(j==N-1) {
-                            if(A[j]+i<=L) {
-                                cout << i << '\n';
-                                K--;
-                            }
-                        }
-                        if((A[j]-A[j-1]+1)/2>=i) {
-                            cout << i << '\n';
-                            K--;
-                            if(K>0 && i*2<=A[j]-A[j-1]) {
-                                cout << i << '\n';
-                                K--;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    set<long long> visited;
+    while(!q.empty()) {
+        pair<long long, int> cur = q.front(); q.pop();
+        if(visited.count(cur.first)) continue;
+        cout << cur.second << '\n';
+        K--;
+        if(K==0) break;
+        visited.insert(cur.first);
+        if(cur.first-1>=0 && !visited.count(cur.first-1)) q.push(make_pair(cur.first-1, cur.second+1));
+        if(cur.first+1<=L && !visited.count(cur.first+1)) q.push(make_pair(cur.first+1, cur.second+1));
     }
 }
