@@ -59,5 +59,4 @@ int main() {
         }
         if(!chk) cout << "This sequence is anti-primed.\n";
     }
-
 }
