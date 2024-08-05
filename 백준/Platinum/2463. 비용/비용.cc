@@ -53,8 +53,9 @@ int main() {
     for(int i=0;i<M;i++) {
         if(merge(v[i].x-1, v[i].y-1)) {
             search(v[i].x-1);
-            cost = (cost+(_size[parent[v[i].x-1]]*(_size[parent[v[i].x-1]]-1)/2-before[parent[v[i].x-1]])*sum)%MOD;
-            before[parent[v[i].x-1]] = _size[parent[v[i].x-1]]*(_size[parent[v[i].x-1]]-1)/2;
+            int x = parent[v[i].x-1];
+            cost = (cost+(_size[x]*(_size[x]-1)/2-before[x])*sum)%MOD;
+            before[x] = _size[x]*(_size[x]-1)/2;
         }
         sum -= v[i].w;
     }
