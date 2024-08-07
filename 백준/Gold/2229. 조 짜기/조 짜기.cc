@@ -9,18 +9,14 @@ int main() {
         cin >> arr[i];
     }
 
-    int sum[N+1] = {0, }, minVal[N+1], maxVal[N+1];
+    int sum[N+1] = {0, };
     for(int i=1;i<=N;i++) {
-        int tmpMax = arr[i];
-        int tmpMin = arr[i];
+        int maxVal = arr[i];
+        int minVal = arr[i];
         for(int j=i-1;j>0;j--) {
-            tmpMax = max(tmpMax, arr[j]);
-            tmpMin = min(tmpMin, arr[j]);
-            if(sum[i]<sum[j-1]+tmpMax-tmpMin) {
-                maxVal[i]=tmpMax;
-                minVal[i]=tmpMin;
-                sum[i] = sum[j-1] + tmpMax-tmpMin;
-            }
+            maxVal = max(maxVal, arr[j]);
+            minVal = min(minVal, arr[j]);
+            sum[i] = max(sum[i], sum[j-1]+maxVal-minVal);
         }
     }
     cout << sum[N];
