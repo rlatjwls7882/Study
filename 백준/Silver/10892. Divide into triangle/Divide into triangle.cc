@@ -4,7 +4,6 @@ using namespace std;
 struct Stake {
     int x, y, num;
     bool operator<(const Stake a) const {
-        if(this->x==a.x) return this->y < a.y;
         return this->x < a.x;
     }
 };
