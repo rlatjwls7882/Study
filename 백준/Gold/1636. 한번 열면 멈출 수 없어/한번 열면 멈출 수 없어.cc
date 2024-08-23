@@ -10,7 +10,7 @@ int main(void) {
         cin >> s[i] >> e[i];
     }
 
-    bool up=false, down=false;
+    bool up=false;
     int minVal=s[0], maxVal=e[0];
     for(int i=1;i<n;i++) {
         int nextMinVal = max(minVal, s[i]);
@@ -18,11 +18,8 @@ int main(void) {
         if(nextMinVal<=nextMaxVal) {
             minVal = nextMinVal;
             maxVal = nextMaxVal;
-        } else if(s[i]>maxVal) {
-            up=true;
-            break;
         } else {
-            down=true;
+            if(s[i]>maxVal) up=true;
             break;
         }
     }
@@ -42,6 +39,7 @@ int main(void) {
         int nextVal=curVal;
         if(curVal<s[i]) nextVal = s[i];
         else if(curVal>e[i]) nextVal = e[i];
+
         res.push_back(nextVal);
         cost += abs(nextVal-curVal);
         curVal = nextVal;
