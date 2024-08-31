@@ -6,7 +6,7 @@ int main() {
 
     double x=-8140;
     for(int i=0;i<814;i++) {
-        x += sqrt(i);
+        x += sqrt(i+31);
         cout << x << ' ' << x << '\n';
     }
 }
