@@ -16,9 +16,11 @@ int main() {
     dp[0][0]=0;
     for(int i=1;i<N;i++) {
         for(int j=i-1;j>=0;j--) {
-            for(int k=0;k<=K;k++) {
-                if(dp[j][k]!=-1 && k+(i-j-1)<=K) {
-                    int next = k+(i-j-1);
+            int skip = (i-j-1);
+            if(skip>K) break;
+            for(int k=0;k+skip<=K;k++) {
+                if(dp[j][k]!=-1) {
+                    int next = k+skip;
                     int nextDist = dp[j][k]+abs(pos[i][0]-pos[j][0])+abs(pos[i][1]-pos[j][1]);
                     if(dp[i][next]==-1) dp[i][next] = nextDist;
                     else dp[i][next] = min(dp[i][next], nextDist);
