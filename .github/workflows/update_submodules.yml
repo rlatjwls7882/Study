@@ -7,10 +7,10 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  build:
+  update-submodules:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
         
       - name: Update submodule
