@@ -13,6 +13,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
+          path: Study
+          token: ${{ secrets.GH_ACTIONS_TOKEN }}
           persist-credentials: false
           submodules: true
         
