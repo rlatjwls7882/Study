@@ -5,13 +5,17 @@ on:
     branches: ["main"]
   schedule:
     - cron: '*/5 * * * *'
+  push
 
 jobs:
-  update-submodules:
+  build:
+    name: Submodule update
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-        
-      - name: Update Submodules
-        run: git submodule update --remote --recursive
+      - name: run action
+        id: run_action
+        uses: PaulRitter/github-action-create-commit-parent-submodule@v2.0
+        with:
+          github_token: ${{ secrets.GH_ACTIONS_TOKEN }}
+          parent_repository: rlatjwls7882/Study
+          parent_branch: main
