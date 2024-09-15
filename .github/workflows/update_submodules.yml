@@ -20,5 +20,7 @@ jobs:
       - name: Update Submodules
         run: |
           git submodule update --remote --recursive
+          git config --global user.email "rlatjwls7882@gmail.com"
+          git config --global user.name "rlatjwls7882"
           git commit -m "Update 백준"
           git push origin main
