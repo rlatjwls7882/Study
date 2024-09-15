@@ -25,3 +25,5 @@ jobs:
           git config --global user.name "GitHub Action"
           git commit -am "Update 백준"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_TOKEN }}
