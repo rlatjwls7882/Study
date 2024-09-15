@@ -20,7 +20,6 @@ jobs:
         
       - name: Update Submodules
         run: |
-          git pull --recurse-submodules
           git submodule update --remote --recursive
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
