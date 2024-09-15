@@ -17,4 +17,6 @@ jobs:
           submodules: true
         
       - name: Update Submodules
-        run: git submodule update --remote --recursive
+        run: |
+          git config --global core.longpaths true
+          git submodule update --remote --recursive
