@@ -16,6 +16,7 @@ jobs:
           persist-credentials: false
           token: ${{ secrets.GH_ACTIONS_TOKEN }}
           submodules: true
+          repository: org/Study
         
       - name: Update Submodules
         run: |
@@ -25,5 +26,3 @@ jobs:
           git config --global user.name "GitHub Action"
           git commit -am "Update 백준"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_ACTIONS_TOKEN }}
