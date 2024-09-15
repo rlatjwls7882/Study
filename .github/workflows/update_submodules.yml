@@ -10,8 +10,8 @@ jobs:
   update-submodules:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout Repo
         uses: actions/checkout@v4
         
-      - name: Update submodule
+      - name: Update Submodules
         run: git submodule update --remote --recursive
