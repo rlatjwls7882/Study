@@ -18,4 +18,7 @@ jobs:
           submodules: true
         
       - name: Update Submodules
-        run: git submodule update --remote --merge
+        run: |
+          git submodule update --remote --recursive
+          git commit -m "Update 백준"
+          git push origin main
