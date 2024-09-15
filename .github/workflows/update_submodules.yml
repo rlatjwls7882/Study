@@ -16,7 +16,7 @@ jobs:
           persist-credentials: false
           token: ${{ secrets.GH_ACTIONS_TOKEN }}
           submodules: true
-          repository: org/Study
+          repository: org/private-repo
         
       - name: Update Submodules
         run: |
