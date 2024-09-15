@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Support longpaths
-        run: git config --system core.longpaths true
+        run: sudo git config --system core.longpaths true
         
       - name: Checkout repo
         uses: actions/checkout@v4
