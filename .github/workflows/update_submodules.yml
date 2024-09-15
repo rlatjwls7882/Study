@@ -13,8 +13,9 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           token: ${{ secrets.GH_ACTIONS_TOKEN }}
-          submodules: recursive
+          submodules: true
         
       - name: Update Submodules
         run: git submodule update --remote --recursive
