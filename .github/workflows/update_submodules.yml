@@ -18,9 +18,4 @@ jobs:
           submodules: true
         
       - name: Update Submodules
-        run: |
-          git submodule update --remote --recursive
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
-          git commit -am "Update 백준"
-          git push
+        run: git submodule update --remote --merge
