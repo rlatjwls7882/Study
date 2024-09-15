@@ -14,7 +14,10 @@ jobs:
         run: git config "--global" core.longpaths true
         
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_ACTIONS_TOKEN }}
+          submodules: true
         
       - name: Update Submodules
         run: git submodule update --remote --recursive
