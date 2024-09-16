@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
   schedule:
-    - cron: '*/60 * * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   build:
@@ -14,6 +14,7 @@ jobs:
       with:
         persist-credentials: false
         fetch-depth: 0 
+        
     - name: Submodule update
       run: |
         git submodule init
@@ -21,6 +22,13 @@ jobs:
         git config --global user.email "rlatjwls7882@gmail.com"
         git config --global user.name "rlatjwls7882"
         git commit -m "update submodule" -a
+        id: subUpdate
+        continue-on-error: true
+        
+    - name: Check on failures
+      if: steps.subUpdate.outputs.status == 'failure'
+      run: exit 0
+      
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
