@@ -1,66 +1,63 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int arr[101], size=0;
-
-void swap(int *x, int *y) {
-    int tmp = *x;
-    *x = *y;
-    *y = tmp;
+void swap(int *a, int *b) {
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
 }
 
-int max(int a, int b) {
-    return a<b ? b : a;
-}
-
-void upHeap(int i) {
+void upHeap(int *arr, int i) {
     while(i>1 && arr[i]>arr[i/2]) {
         swap(&arr[i], &arr[i/2]);
         i/=2;
     }
 }
 
-void downHeap(int i) {
-    while(i*2<=size && max(arr[i*2], arr[i*2+1])>arr[i]) {
-        if(arr[i*2]>arr[i*2+1]) {
+void downHeap(int *arr, int i, int size) {
+    while(1) {
+        if(i*2+1<=size && arr[i*2+1]>=arr[i*2] && arr[i*2+1]>arr[i]) {
+            swap(&arr[i], &arr[i*2+1]);
+            i = i*2+1;
+        } else if(i*2<=size && arr[i*2]>arr[i]) {
             swap(&arr[i], &arr[i*2]);
             i = i*2;
         } else {
-            swap(&arr[i], &arr[i*2+1]);
-            i = i*2+1;
+            break;
         }
     }
 }
 
-void insertItem(int key) {
-    arr[++size]=key;
-    upHeap(size);
+void insertItem(int *arr, int *size, int val) {
+    arr[++*size] = val;
+    upHeap(arr, *size);
+    printf("0\n");
 }
 
-int removeMax() {
-    int ret = arr[1];
-    arr[1]=arr[size];
-    size--;
-    downHeap(1);
-    return ret;
+void deleteMax(int *arr, int *size) {
+    printf("%d\n", arr[1]);
+    arr[1]=arr[(*size)--];
+    downHeap(arr, 1, *size);
 }
 
-void printHeap() {
+void print(int *arr, int size) {
     for(int i=1;i<=size;i++) printf(" %d", arr[i]);
     printf("\n");
 }
 
-int main() {
+int main(void) {
+    int *arr = (int*)malloc(sizeof(int)*100);
+    int size=0;
+
     while(1) {
-        char ch, tmp; scanf("%c%c", &ch, &tmp);
+        char ch; scanf("%c%*c", &ch);
         if(ch=='i') {
-            int v; scanf("%d%c", &v, &tmp);
-            printf("0\n");
-            insertItem(v);
+            int val; scanf("%d%*c", &val);
+            insertItem(arr, &size, val);
         } else if(ch=='d') {
-            printf("%d\n", removeMax());
+            deleteMax(arr, &size);
         } else if(ch=='p') {
-            printHeap();
+            print(arr, size);
         } else {
             break;
         }
