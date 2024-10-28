@@ -9,10 +9,6 @@ void swap(int *a, int *b) {
     *b = tmp;
 }
 
-int max(int a, int b) {
-    return a>b?a:b;
-}
-
 void upHeap(int i, int curSize) {
     while(1) {
         if(i*2+1<=curSize && arr[i*2]<arr[i*2+1] && arr[i*2+1]>arr[i]) {
