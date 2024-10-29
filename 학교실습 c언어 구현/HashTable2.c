@@ -43,4 +43,5 @@ int main(void) {
         if(ch=='i') insert(arr, val, M);
         else select(arr, val, M);
     }
+    free(arr);
 }

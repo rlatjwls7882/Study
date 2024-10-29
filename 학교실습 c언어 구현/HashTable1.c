@@ -78,4 +78,5 @@ int main(void) {
             break;
         }
     }
+    free(arr);
 }
