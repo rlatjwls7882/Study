@@ -1,148 +1,139 @@
 #include<stdio.h>
+#include<string.h>
 #include<stdlib.h>
-#include<memory.h>
 
-// DAG
+/* DAG */
 typedef struct list {
     struct list *next;
-    struct edge* e;
+    struct edge *e;
 } list;
 
 typedef struct node {
-    char val;
-    int nodeNum;
-    list *conn;
+    int inDegree, visited;
+    char nodeNum;
+    list *l;
 } node;
 
 typedef struct edge {
     node *a, *b;
 } edge;
 
-
-// Queue
-typedef struct Qlist {
-    struct Qlist *prev, *next;
-    node* n;
-} Qlist;
-
-typedef struct queue {
-    Qlist *front, *back;
-    int empty;
-} queue;
-
-// graph input
 void insert(node *n, edge *e) {
     list *l = (list*)malloc(sizeof(list));
-    l->next=n->conn->next;
-    l->e=e;
-    n->conn->next = l;
+    l->next = n->l->next;
+    l->e = e;
+    n->l->next = l;
 }
 
-// free
-void freeList(list *l) {
-    if(l->next) freeList(l->next);
-    free(l);
+void freeList(list *cur) {
+    if(cur->next) freeList(cur->next);
+    free(cur);
 }
+/* DAG */
 
-void freeQList(Qlist *l) {
-    if(l->next) freeQList(l->next);
-    free(l);
-}
+/* Queue */
+typedef struct queueList {
+    struct queueList *prev, *next;
+    node *n;
+} queueList;
 
-// init Queue
-void initQ(queue *q) {
-    q->front = NULL;
-    q->back = NULL;
-    q->empty=1;
-}
+typedef struct queue {
+    queueList *front, *back;
+} queue;
 
-// push item in queue
-void push(queue *q, node *n) {
-    Qlist *l = (Qlist*)malloc(sizeof(Qlist));
-    l->prev = l->next = NULL;
+void insertQ(queue *q, node *n) {
+    queueList *l = (queueList*)malloc(sizeof(queueList));
+    l->prev = q->back;
+    l->next=NULL;
     l->n = n;
-    if(q->empty) {
-        q->back = q->front = l;
-    } else {
-        q->back->next = l;
-        l->prev = q->back;
-        q->back = l;
-    }
-    q->empty=0;
+    if(q->back) q->back->next = l;
+    q->back = l;
+    if(!q->front) q->front = l;
 }
 
-// pop item in queue
-void pop(queue *q) {
+node* frontQ(queue *q) {
+    node *tmp = q->front->n;
     q->front = q->front->next;
-    if(q->front == NULL) q->empty=1;
-    else q->front->prev=NULL;
+    if(q->front) free(q->front->prev);
+    return tmp;
 }
+/* Queue */
 
-void topological_sort(int N, node *n, int *inDegree) {
-    // sort
-    char *res = (char*)malloc(sizeof(char)*N);
-    int resIdx=0;
+void topologicalSort(node *n, int N) {
     queue *q = (queue*)malloc(sizeof(queue));
-    initQ(q);
-    for(int i=0;i<N;i++) if(!inDegree[i]) push(q, &n[i]);
-    while(!q->empty) {
-        node *top = q->front->n; pop(q);
-        list *cur = top->conn;
-        while(cur->next) {
-            cur = cur->next;
-            node *next = cur->e->b;
-            if(--inDegree[next->nodeNum]==0) {
-                push(q, next);
-            }
+    q->back=q->front=NULL;
+
+    for(int i=0;i<N;i++) if(n[i].inDegree==0) insertQ(q, &n[i]);
+
+    char order[N]; int idx=0;
+    while(q->front) {
+        node *cur = frontQ(q);
+        order[idx++] = cur->nodeNum;
+
+        list *l = cur->l;
+        while(l->next) {
+            l = l->next;
+            if(--l->e->b->inDegree==0) insertQ(q, l->e->b);
         }
-        res[resIdx++] = top->val;
     }
 
-    // print
-    if(resIdx==N) for(int i=0;i<resIdx;i++) printf("%c ", res[i]);
-    else printf("0");
-
-    // free
-    free(res);
-    if(q->front) freeQList(q->front);
+    if(idx==N) {
+        for(int i=0;i<N;i++) printf("%c ", order[i]);
+    } else {
+        printf("0");
+    }
     free(q);
 }
 
-int main(void) {
-    int N; scanf("%d", &N);
-    int *charToIdx = (int*)malloc(sizeof(int)*128);
-    for(int i=0;i<128;i++) charToIdx[i] = NULL;
-    int *inDegree = (int*)malloc(sizeof(int)*N);
-    for(int i=0;i<N;i++) inDegree[i]=0;
-
-    // input node
+int main() {
+    int N; scanf("%d%*c", &N);
     node *n = (node*)malloc(sizeof(node)*N);
+    int charToNodeNum[128] = {0, };
     for(int i=0;i<N;i++) {
-        scanf(" %c", &n[i].val);
-        charToIdx[n[i].val]=i;
-        n[i].nodeNum=i;
-        n[i].conn = (list*)malloc(sizeof(list));
-        n[i].conn->next = NULL;
+        n[i].inDegree=n[i].visited=0;
+        scanf("%c%*c", &n[i].nodeNum);
+        n[i].l = (list*)malloc(sizeof(list));
+        n[i].l->next = NULL;
+        charToNodeNum[n[i].nodeNum]=i;
     }
 
-    // input edge
-    int M; scanf("%d", &M);
+    int M; scanf("%d%*c", &M);
     edge *e = (edge*)malloc(sizeof(edge)*M);
     for(int i=0;i<M;i++) {
-        char a, b; scanf(" %c %c", &a, &b);
-        e[i].a = &n[charToIdx[a]];
-        e[i].b = &n[charToIdx[b]];
+        char u, v; scanf("%c %c%*c", &u, &v);
+        e[i].a = &n[charToNodeNum[u]];
+        e[i].b = &n[charToNodeNum[v]];
+        e[i].b->inDegree++;
         insert(e[i].a, &e[i]);
-        inDegree[charToIdx[b]]++;
     }
-
-    // sort
-    topological_sort(N, n, inDegree);
-
-    // free
-    free(inDegree);
-    free(charToIdx);
-    for(int i=0;i<N;i++) if(n[i].conn->next) freeList(n[i].conn);
+    topologicalSort(n, N);
+    for(int i=0;i<N;i++) freeList(n[i].l);
     free(n);
     free(e);
 }
+/*
+Input1
+3
+A B C
+3
+A B
+C A
+C B
+
+Output1
+C A B
+
+Input2
+4
+A B C D
+6
+A B
+C A
+C B
+A D
+B D
+D C
+
+Output2
+0
+*/
