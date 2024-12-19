@@ -1,10 +1,16 @@
 #include<stdio.h>
+#include<string.h>
 #include<stdlib.h>
-#include<memory.h>
+
+typedef struct list {
+    struct list *next;
+    struct edge *e;
+} list;
 
 typedef struct node {
+    int nodeNum;
     struct node *parent;
-    int n;
+    list *l;
 } node;
 
 typedef struct edge {
@@ -12,8 +18,38 @@ typedef struct edge {
     int cost;
 } edge;
 
+void insert(node *n, edge *e) {
+    list *l = (list*)malloc(sizeof(list));
+    l->next = n->l->next;
+    l->e = e;
+    n->l->next = l;
+}
+
+void freeList(list* l) {
+    if(l->next) freeList(l->next);
+    free(l);
+}
+
+/* DSU */
+node* find(node *n) {
+    if(n == n->parent) return n;
+    return n->parent = find(n->parent);
+}
+
+int merge(node *x, node *y) {
+    x = find(x);
+    y = find(y);
+
+    if(x==y) return 0;
+    if(x->nodeNum > y->nodeNum) x->parent = y;
+    else y->parent = x;
+    return 1;
+}
+/* DSU */
+
+/* PriorityQueue */
 typedef struct priority_queue {
-    edge *heap;
+    edge *arr;
     int size;
 } priority_queue;
 
@@ -23,14 +59,14 @@ void swap(edge *a, edge *b) {
     *b = tmp;
 }
 
-void pqInsert(priority_queue *pq, edge *e) {
+void push(priority_queue *pq, edge *e) {
     pq->size++;
-    pq->heap[pq->size]=*e;
+    pq->arr[pq->size] = *e;
 
-    int idx=pq->size;
+    int idx = pq->size;
     while(idx>1) {
-        if(pq->heap[idx].cost < pq->heap[idx/2].cost) {
-            swap(&pq->heap[idx], &pq->heap[idx/2]);
+        if(pq->arr[idx].cost < pq->arr[idx/2].cost) {
+            swap(&pq->arr[idx], &pq->arr[idx/2]);
             idx/=2;
         } else {
             break;
@@ -38,72 +74,99 @@ void pqInsert(priority_queue *pq, edge *e) {
     }
 }
 
-edge pop(priority_queue *pq) {
-    swap(&pq->heap[1], &pq->heap[pq->size]);
-    pq->size--;
-
+edge top(priority_queue *pq) {
+    edge a = pq->arr[1];
+    pq->arr[1] = pq->arr[pq->size--];
     int idx=1;
-    while(1) {
-        if(idx*2+1<=pq->size && pq->heap[idx*2+1].cost<pq->heap[idx*2].cost && pq->heap[idx*2+1].cost < pq->heap[idx].cost) {
-            swap(&pq->heap[idx], &pq->heap[idx*2+1]);
+    while(idx<=pq->size) {
+        if(idx*2+1<=pq->size && pq->arr[idx].cost > pq->arr[idx*2+1].cost && pq->arr[idx*2+1].cost < pq->arr[idx*2].cost) {
+            swap(&pq->arr[idx], &pq->arr[idx*2+1]);
             idx = idx*2+1;
-        } else if(idx*2<=pq->size && pq->heap[idx*2].cost < pq->heap[idx].cost) {
-            swap(&pq->heap[idx], &pq->heap[idx*2]);
-            idx*=2;
+        } else if(idx*2<=pq->size && pq->arr[idx].cost > pq->arr[idx*2].cost) {
+            swap(&pq->arr[idx], &pq->arr[idx*2]);
+            idx = idx*2;
         } else {
             break;
         }
     }
-    return pq->heap[pq->size+1];
+    return a;
+}
+/* PriorityQueue */
+
+void Kruskal(node *n, edge *e, int N, int M) {
+    priority_queue *pq = (priority_queue*)malloc(sizeof(priority_queue));
+    pq->arr = (edge*)malloc(sizeof(edge)*M);
+    pq->size=0;
+    for(int i=0;i<M;i++) push(pq, &e[i]);
+
+    int totalCost=0;
+    while(pq->size) {
+        edge cur = top(pq);
+        if(merge(cur.a, cur.b)) {
+            printf(" %d", cur.cost);
+            totalCost += cur.cost;
+        }
+    }
+    printf("\n%d", totalCost);
+    free(pq->arr);
+    free(pq);
 }
 
-node* find(node *n) {
-    if(n->parent==n) return n;
-    return n->parent = find(n->parent);
-}
-
-int merge(node *a, node *b) {
-    node *aP = find(a);
-    node *bP = find(b);
-    if(aP==bP) return 0;
-    if(aP<bP) bP->parent=aP;
-    else aP->parent=bP;
-    return 1;
-}
-
-int main(void) {
+int main() {
     int N, M; scanf("%d %d", &N, &M);
     node *n = (node*)malloc(sizeof(node)*N);
     edge *e = (edge*)malloc(sizeof(edge)*M);
-    for(int i=0;i<N;i++) n[i].parent=&n[i], n[i].n=i;
 
-    // Priority_Queue Init
-    priority_queue *pq = (priority_queue*)malloc(sizeof(priority_queue));
-    pq->heap = (edge*)malloc(sizeof(edge)*(M+1));
-    pq->size=0;
+    for(int i=0;i<N;i++) {
+        n[i].l = (list*)malloc(sizeof(list));
+        n[i].l->next = NULL;
+        n[i].nodeNum = i;
+        n[i].parent = &n[i];
+    }
 
     for(int i=0;i<M;i++) {
         int a, b, c; scanf("%d %d %d", &a, &b, &c);
         e[i].a = &n[a-1];
         e[i].b = &n[b-1];
         e[i].cost = c;
-        pqInsert(pq, &e[i]);
+        insert(e[i].a, &e[i]);
+        insert(e[i].b, &e[i]);
     }
+    Kruskal(n, e, N, M);
 
-    // Kruskal
-    int sum=0;
-    while(pq->size) {
-        edge cur = pop(pq);
-        if(merge(cur.a, cur.b)) {
-            sum += cur.cost;
-            printf(" %d", cur.cost);
-        }
-    }
-    printf("\n%d", sum);
-
-    // Free
-    free(pq->heap);
-    free(pq);
-    free(e);
+    // free
+    for(int i=0;i<N;i++) freeList(n[i].l);
     free(n);
+    free(e);
 }
+/*
+Input1
+6 9
+1 2 3
+1 3 20
+2 4 25
+2 5 17
+3 4 34
+3 5 1
+3 6 12
+4 5 5
+5 6 37
+
+Output1
+ 1 3 5 12 17
+38
+
+Input2
+5 7
+1 2 75
+1 4 95
+1 3 51
+2 4 9
+4 3 19
+4 5 42
+3 5 31
+
+Output2
+ 9 19 31 51
+110
+*/
