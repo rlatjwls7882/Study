@@ -1,85 +1,125 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<memory.h>
 
-typedef struct list {
-    struct list* next;
-    struct edge* connectedEdge;
-} list;
-
+/* Graph */
 typedef struct node {
-    list *adj;
-    int val, visited;
+    int nodeNum, visited;
 } node;
 
 typedef struct edge {
-    node *node1, *node2;
+    node *a, *b;
 } edge;
+/* Graph */
 
-int getNextNodeNum(edge *e, int from) {
-    if(e->node1->val==from) return e->node2->val;
-    return e->node1->val;
+/* Queue */
+typedef struct list {
+    struct list *prev, *next;
+    struct node *n;
+} list;
+
+typedef struct queue {
+    list *front, *back;
+} queue;
+
+void push(queue *q, node *n) {
+    list *l = (list*)malloc(sizeof(list));
+    l->n = n;
+    l->next = NULL;
+    l->prev = q->back;
+    if(q->back) q->back->next = l;
+    q->back = l;
+    if(!q->front) q->front = l;
 }
 
-node* getNextNode(node *n, list* cur) {
-    if(cur->connectedEdge->node1==n) return cur->connectedEdge->node2;
-    return cur->connectedEdge->node1;
+node* front(queue *q) {
+    node* tmp = q->front->n;
+    q->front = q->front->next;
+    if(q->front && q->front->prev) free(q->front->prev);
+    return tmp;
 }
+/* Queue */
 
-void connect(node *n, edge *e, int to) {
-    list *newNode = (list*)malloc(sizeof(list));
-    newNode->next=NULL;
-    newNode->connectedEdge = e;
-
-    list *cur = n->adj;
-    if(cur->next==NULL) {
-        cur->next = newNode;
-    } else {
-        while(cur->next!=NULL && getNextNodeNum(cur->next->connectedEdge, n->val)<to) cur = cur->next;
-        if(cur->next) newNode->next = cur->next;
-        cur->next = newNode;
-    }
-}
-
-void dfs(node *n) {
-    if(n->visited) return;
-    n->visited = 1;
-    printf("%d\n", n->val);
-    list *cur = n->adj;
-
-    while(cur->next) {
-        dfs(getNextNode(n, cur->next));
-        cur = cur->next;
-    }
-}
-
-void freeList(list *cur) {
-    if(cur->next) freeList(cur->next);
-    free(cur);
-}
-
-int main(void) {
-    int N, M, S; scanf("%d %d %d", &N, &M, &S);
+int main() {
+    int N, M, S; scanf("%d%d%d", &N, &M, &S);
     node *n = (node*)malloc(sizeof(node)*N);
     edge *e = (edge*)malloc(sizeof(edge)*M);
+    int matrix[N][N];
+    memset(matrix, -1, sizeof(matrix));
 
     for(int i=0;i<N;i++) {
-        n[i].adj = (list*)malloc(sizeof(list));
-        n[i].adj->next=NULL;
-        n[i].val = i+1;
-        n[i].visited = 0;
+        n[i].nodeNum = i;
+        n[i].visited=0;
     }
 
     for(int i=0;i<M;i++) {
-        int a, b; scanf("%d %d", &a, &b);
-        e[i].node1 = &n[a-1];
-        e[i].node2 = &n[b-1];
-        connect(&n[a-1], &e[i], b);
-        connect(&n[b-1], &e[i], a);
+        int a, b; scanf("%d%d", &a, &b);
+        e[i].a = &n[a-1];
+        e[i].b = &n[b-1];
+        matrix[a-1][b-1]=i;
+        matrix[b-1][a-1]=i;
     }
 
-    dfs(&n[S-1]);
+    queue *q = (queue*)malloc(sizeof(queue));
+    q->front = q->back = NULL;
+    push(q, &n[S-1]);
+    while(q->front) {
+        node *cur = front(q);
+        if(cur->visited) continue;
+        cur->visited=1;
+        printf("%d\n", cur->nodeNum+1);
 
-    for(int i=0;i<N;i++) freeList(n[i].adj);
+        for(int i=0;i<N;i++) if(matrix[cur->nodeNum][i]!=-1) push(q, &n[i]);
+    }
+
+    free(q);
     free(n);
     free(e);
 }
+
+/*
+Input1
+6 9 1
+3 5
+1 3
+4 1
+2 3
+3 4
+6 4
+3 6
+1 2
+2 5
+
+Output1
+1
+2
+3
+4
+5
+6
+
+Input2
+8 12 4
+1 2
+2 4
+4 7
+3 6
+6 1
+7 6
+7 8
+1 3
+2 7
+1 4
+2 5
+7 5
+
+Output2
+4
+1
+2
+7
+3
+6
+5
+8
+*/
