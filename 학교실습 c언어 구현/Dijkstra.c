@@ -1,16 +1,16 @@
 #include<stdio.h>
+#include<string.h>
 #include<stdlib.h>
-#include<memory.h>
 #define INF 0x3f3f3f3f
 
-/* list */
+/* Graph */
 typedef struct list {
     struct list *next;
     struct edge *e;
 } list;
 
 typedef struct node {
-    int nodeNum, totalCost;
+    int nodeNum, minCost;
     list *l;
 } node;
 
@@ -19,46 +19,44 @@ typedef struct edge {
     int cost;
 } edge;
 
-void insertEdge(node *n, edge *e) {
-    list *newList = (list*)malloc(sizeof(list));
-    newList->next=NULL;
-    newList->e = e;
-
-    list *cur = n->l;
-    while(cur->next) cur = cur->next;
-    cur->next = newList;
+void insert(node *n, edge *e) {
+    list *l = (list*)malloc(sizeof(list));
+    l->next = n->l->next;
+    l->e = e;
+    n->l->next = l;
 }
 
-node* getAnotherNode(edge *e, int nodeNum) {
-    if(e->a->nodeNum==nodeNum) return e->b;
-    else return e->a;
+node* getAnotherNode(node *n, edge *e) {
+    if(e->a==n) return e->b;
+    return e->a;
 }
-/* list */
 
-/* Priority Queue */
-typedef struct pqNode {
-    int nodeNum, cost;
-} pqNode;
+void freeList(list *l) {
+    if(l->next) freeList(l->next);
+    free(l);
+}
+/* Graph */
 
+/* PriorityQueue */
 typedef struct priority_queue {
-    pqNode n[100001];
+    node *heap;
     int size;
 } priority_queue;
 
-void swap(pqNode *a, pqNode *b) {
-    pqNode tmp = *a;
+void swap(node *a, node *b) {
+    node tmp = *a;
     *a = *b;
     *b = tmp;
 }
 
-void push(priority_queue *pq, int nodeNum, int cost) {
-    int idx=++pq->size;
-    pq->n[idx].nodeNum = nodeNum;
-    pq->n[idx].cost = cost;
-
+void push(priority_queue *pq, node *n, int cost) {
+    pq->size++;
+    pq->heap[pq->size]=*n;
+    pq->heap[pq->size].minCost = cost;
+    int idx=pq->size;
     while(idx>1) {
-        if(pq->n[idx/2].cost>pq->n[idx].cost) {
-            swap(&pq->n[idx/2], &pq->n[idx]);
+        if(pq->heap[idx].minCost < pq->heap[idx/2].minCost) {
+            swap(&pq->heap[idx], &pq->heap[idx/2]);
             idx/=2;
         } else {
             break;
@@ -66,81 +64,78 @@ void push(priority_queue *pq, int nodeNum, int cost) {
     }
 }
 
-pqNode pop(priority_queue *pq) {
-    swap(&pq->n[1], &pq->n[pq->size]);
+node top(priority_queue *pq) {
+    node tmp = pq->heap[1];
+    swap(&pq->heap[1], &pq->heap[pq->size]);
     pq->size--;
-
     int idx=1;
     while(idx<=pq->size) {
-        if(idx*2+1<=pq->size && pq->n[idx*2+1].cost<pq->n[idx*2].cost && pq->n[idx].cost<pq->n[idx*2+1].cost) {
-            swap(&pq->n[idx], &pq->n[idx*2+1]);
+        if(idx*2+1<=pq->size && pq->heap[idx].minCost > pq->heap[idx*2+1].minCost && pq->heap[idx*2+1].minCost < pq->heap[idx*2].minCost) {
+            swap(&pq->heap[idx], &pq->heap[idx*2+1]);
             idx = idx*2+1;
-        } else if(idx*2<=pq->size && pq->n[idx].cost<pq->n[idx*2].cost) {
-            swap(&pq->n[idx], &pq->n[idx*2]);
+        } else if(idx*2<=pq->size && pq->heap[idx].minCost > pq->heap[idx*2].minCost) {
+            swap(&pq->heap[idx], &pq->heap[idx*2]);
             idx = idx*2;
         } else {
             break;
         }
     }
-    return pq->n[pq->size+1];
+    return tmp;
 }
-/* Priority Queue */
+/* PriorityQueue */
 
-/* free */
-void freeList(list *l) {
-    if(l->next) freeList(l->next);
-    free(l);
+void Dijkstra(node *n, edge *e, int N, int M, int S) {
+    priority_queue *pq = (priority_queue*)malloc(sizeof(priority_queue));
+    pq->heap = (node*)malloc(sizeof(node)*10000);
+    pq->size=0;
+    push(pq, &n[S-1], 0);
+
+    while(pq->size) {
+        node cur = top(pq);
+        if(n[cur.nodeNum].minCost<=cur.minCost) continue;
+        n[cur.nodeNum].minCost = cur.minCost;
+        list *l = cur.l;
+        while(l->next) {
+            l = l->next;
+            node *next = getAnotherNode(&n[cur.nodeNum], l->e);
+            push(pq, next, cur.minCost+l->e->cost);
+        }
+    }
+    for(int i=0;i<N;i++) if(n[i].minCost!=0 && n[i].minCost!=INF) printf("%d %d\n", n[i].nodeNum+1, n[i].minCost);
+    free(pq->heap);
+    free(pq);
 }
-/* free */
 
-int main(void) {
+int main() {
     int N, M, S; scanf("%d%d%d", &N, &M, &S);
     node *n = (node*)malloc(sizeof(node)*N);
     edge *e = (edge*)malloc(sizeof(edge)*M);
 
     for(int i=0;i<N;i++) {
-        n[i].nodeNum=i;
-        n[i].totalCost = INF;
+        n[i].nodeNum = i;
+        n[i].minCost = INF;
         n[i].l = (list*)malloc(sizeof(list));
-        n[i].l->next=NULL;
+        n[i].l->next = NULL;
     }
 
     for(int i=0;i<M;i++) {
-        int u, v, w; scanf("%d%d%d", &u, &v, &w);
-        e[i].a = &n[u-1];
-        e[i].b = &n[v-1];
-        e[i].cost = w;
-        insertEdge(e[i].a, &e[i]);
-        insertEdge(e[i].b, &e[i]);
+        int a, b, c; scanf("%d%d%d", &a, &b, &c);
+        e[i].a = &n[a-1];
+        e[i].b = &n[b-1];
+        e[i].cost = c;
+        insert(e[i].a, &e[i]);
+        insert(e[i].b, &e[i]);
     }
-
-    priority_queue *pq = (priority_queue*)malloc(sizeof(priority_queue));
-    pq->size=0;
-    push(pq, S-1, 0);
-    while(pq->size) {
-        pqNode top = pop(pq);
-        if(top.cost>=n[top.nodeNum].totalCost) continue;
-        n[top.nodeNum].totalCost = top.cost;
-
-        list *next = n[top.nodeNum].l;
-        while(next->next) {
-            push(pq, getAnotherNode(next->next->e, top.nodeNum)->nodeNum, top.cost+next->next->e->cost);
-            next = next->next;
-        }
-    }
-
-    for(int i=0;i<N;i++) {
-        if(i!=S-1 && n[i].totalCost!=INF) printf("%d %d\n", i+1, n[i].totalCost);
-    }
+    Dijkstra(n, e, N, M, S);
 
     // free
     for(int i=0;i<N;i++) freeList(n[i].l);
     free(n);
     free(e);
-    free(pq);
 }
+
 /*
-Input
+Input1
 5 7 1
 1 2 1
 1 4 5
@@ -150,10 +145,44 @@ Input
 3 1 2
 2 3 2
 
-Output
+Output1
 2 1
 3 2
 4 3
 5 5
 
+Input2
+8 12 7
+1 2 1
+2 4 2
+4 7 7
+3 6 1
+6 1 4
+7 6 9
+7 8 1
+1 3 2
+2 7 5
+1 4 1
+2 5 2
+7 5 2
+
+Output2
+1 5
+2 4
+3 7
+4 6
+5 2
+6 8
+8 1
+
+Input3
+5 3 2
+1 2 1
+1 3 1
+1 4 1
+
+Output3
+1 1
+3 2
+4 2
 */
