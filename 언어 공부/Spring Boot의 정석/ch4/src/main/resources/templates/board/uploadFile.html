@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>File Upload</title>
+    <style>
+        a { text-decoration: none; }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        let fileList = [];
+
+        function deleteFile(fileName) {
+            $.ajax({
+                url:'deleteFile',
+                data: {fileName: fileName},
+                dataType: 'text',
+                type: 'POST',
+                success: function(result) {
+                    alert(result);
+
+                    // 파일 목록에서 삭제된 파일을 제거
+                    fileList = fileList.filter(f=>f!=fileName) // 해당 파일을 제외한 파일만 남긴다.
+                    showFileList();
+                }
+            })
+        }
+
+        function showFileList() {
+            let tmp = ``; // 따옴표가 아니라 빽틱
+            for(file of fileList) {
+                tmp += `<li><a href="download?fileName=${file}">${file}</a>
+                    <button id="deleteBtn" onclick="deleteFile('${file}')">삭제</button>
+                </li>`
+            }
+            $('#fileList ul').html(tmp);
+        }
+
+        $(document).ready(function(){
+            let copy = $("#uploadDiv").clone();
+            $("#uploadBtn").on("click", function(){
+                var formData = new FormData();
+                var inputFile = $('input[name=files]');
+                var files = inputFile[0].files;
+
+                for(i=0;i<files.length;i++) {
+                    formData.append("files", files[i]);
+                }
+
+                $.ajax({
+                    url: "/board/uploadAjax",
+                    processData: false,
+                    contentType: false,
+                    data : formData,
+                    type: "POST",
+                    success: function(result){
+                        console.dir(result);
+                        // 1. uploadDiv를 초기화
+                        $("#uploadDiv").html(copy.html());
+
+                        // 2. 파일 목록을 fileList에 추가
+                        fileList = fileList.concat(result);
+                        showFileList();
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+<h2>파일 업로드</h2>
+<!--<form id="uploadForm" action="/board/uploadFile" method="post" enctype="multipart/form-data">-->
+<div id="uploadDiv">
+    <input type="file" id="file" name="files" multiple/>
+</div>
+    <br><br>
+    <button id="uploadBtn">Upload File</button>
+<!--</form>-->
+
+<div id="fileList">
+    <ul>
+
+    </ul>
+</div>
+</body>
+</html>
