@@ -74,6 +74,7 @@ void freeNode(node *n) {
 int main(){
     list *l = (list*)malloc(sizeof(list));
     l->n = (list*)malloc(sizeof(node));
+    l->n->next=l->n->prev=NULL;
     l->size=0;
     
     int n; scanf("%d", &n);
