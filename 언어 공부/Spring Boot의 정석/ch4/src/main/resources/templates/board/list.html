@@ -176,7 +176,6 @@
                 <td th:text="${#dates.format(board.upDate,'yyyy-MM-dd')}">2020-01-30</td>
                 <td th:text="${board.viewCnt}" th:class="viewcnt">999</td>
             </tr>
-            </c:forEach>
         </table>
         <br>
         <button id="writeBtn" class="btn-write" onclick="location.href='/board/write'"><i class="fa fa-pencil"></i> 글쓰기</button>

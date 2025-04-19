@@ -1,31 +1,31 @@
-package com.fastcampus.ch4;
-
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.Tuple;
-import com.querydsl.jpa.impl.JPAQuery;
-import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static com.fastcampus.ch4.QBoard.board;
-
-@SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class BoardRepositoryTest4 {
-
-    @Autowired
-    public EntityManager em;
-    @Autowired
-    private BoardRepository boardRepo;
-
+//package com.fastcampus.ch4;
+//
+//import com.querydsl.core.BooleanBuilder;
+//import com.querydsl.core.Tuple;
+//import com.querydsl.jpa.impl.JPAQuery;
+//import com.querydsl.jpa.impl.JPAQueryFactory;
+//import jakarta.persistence.EntityManager;
+//import jakarta.persistence.TypedQuery;
+//import org.junit.jupiter.api.*;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//import java.util.Arrays;
+//import java.util.Date;
+//import java.util.List;
+//
+//import static org.junit.jupiter.api.Assertions.assertTrue;
+//import static com.fastcampus.ch4.QBoard.board;
+//
+//@SpringBootTest
+//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+//class BoardRepositoryTest4 {
+//
+//    @Autowired
+//    public EntityManager em;
+//    @Autowired
+//    private BoardRepository boardRepo;
+//
 //    @BeforeEach
 //    public void testData() {
 //        for(int i=1;i<=100;i++) {
@@ -102,4 +102,4 @@ class BoardRepositoryTest4 {
 //        List<Board> list = query.fetch();
 //        list.forEach(System.out::println);
 //    }
-}
+//}
