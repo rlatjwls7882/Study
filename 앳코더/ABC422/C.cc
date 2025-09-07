@@ -12,7 +12,7 @@ int main() {
         a -= cnt;
         b -= cnt;
         c -= cnt;
-        cnt += min({a, c, (a+c)/3});
+        cnt += min({a, c, (a+b+c)/3});
         cout << cnt << '\n';
     }
 }
