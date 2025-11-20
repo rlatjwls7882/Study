@@ -1,3 +1,0 @@
-car=com.fastcampus.ch3.di1.Truck
-engine=com.fastcampus.ch3.di1.Engine
-door=com.fastcampus.ch3.di1.Door
